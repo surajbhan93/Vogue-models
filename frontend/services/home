@@ -1,0 +1,81 @@
+// types/home.ts
+
+// ============================================================
+// 🔹 MODEL DATA — FeaturedModels / FeaturedModelCard ke liye
+// ============================================================
+export interface ModelData {
+  id: string;
+  name: string;
+  slug: string;
+  image: string;
+  coverImage?: string;
+  gender?: string;
+  location?: string;
+  category?: string;      // e.g. "Runway", "Editorial", "Commercial"
+  experience?: string;    // e.g. "Beginner" | "Professional" | "Expert"
+  rating?: number;
+  isVerified?: boolean;
+  isFeatured?: boolean;
+  height?: number;
+  weight?: number;
+  age?: number;
+}
+
+// ============================================================
+// 🔹 CATEGORY — Categories section ke liye
+// ============================================================
+export interface CategoryData {
+  id: string;
+  name: string;
+  slug: string;
+  image?: string;
+  icon?: string;
+  count?: number;         // kitne models is category me hain
+  description?: string;
+}
+
+// ============================================================
+// 🔹 STATS — Stats section ke liye (e.g. "500+ Models", "50+ Cities")
+// ============================================================
+export interface StatData {
+  id: string;
+  label: string;
+  value: number | string;
+  suffix?: string;        // e.g. "+", "%"
+  icon?: string;
+}
+
+// ============================================================
+// 🔹 GALLERY ITEM — Gallery section ke liye
+// ============================================================
+export interface GalleryItemData {
+  id: string;
+  image: string;
+  title?: string;
+  category?: string;
+  modelName?: string;
+  modelSlug?: string;
+}
+
+// ============================================================
+// 🔹 TESTIMONIAL — Testimonials section ke liye
+// ============================================================
+export interface TestimonialData {
+  id: string;
+  name: string;
+  role?: string;          // e.g. "Fashion Designer", "Photographer"
+  avatar?: string;
+  message: string;
+  rating?: number;
+}
+
+// ============================================================
+// 🔹 HOME PAGE DATA — getHomePageData() ka return type
+// ============================================================
+export interface HomePageData {
+  featuredModels: ModelData[];
+  categories: CategoryData[];
+  stats: StatData[];
+  galleryItems: GalleryItemData[];
+  testimonials: TestimonialData[];
+}
