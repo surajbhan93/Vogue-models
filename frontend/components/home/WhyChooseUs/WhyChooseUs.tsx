@@ -78,10 +78,11 @@ export function WhyChooseUs() {
           <div className="aspect-[4/5] rounded-[32px] border border-amber-500/30 overflow-hidden relative shadow-[0_20px_50px_rgba(0,0,0,0.12)] bg-white">
             <Image
               src={WHY_CHOOSE_US_DATA.image}
-              alt="Behind the scenes high fashion shoot"
+              alt="Unrivaled Global Presence & Heritage"
               fill
+              unoptimized
               sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover transition-transform duration-700 hover:scale-105"
+              className="object-cover object-top transition-transform duration-700 hover:scale-105"
             />
             
             {/* Seamless Light Gradient Bottom Blend */}

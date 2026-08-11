@@ -21,6 +21,9 @@ import {
   Phone,
   CheckCircle2,
   Code,
+  Award,
+  BookOpen,
+  Newspaper,
 } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 
@@ -41,7 +44,7 @@ export const Footer = () => {
       toast.error('Please enter a valid email address.');
       return;
     }
-    toast.success('Subscribed to Vogue Vibe VIP Casting Alerts!');
+    toast.success('Subscribed to Boom Boom Night In America 2027 Audition Alerts!');
     setEmail('');
   };
 
@@ -90,23 +93,30 @@ export const Footer = () => {
         isDashboardRoute ? 'hidden' : 'relative'
       } bg-[#030508] border-t border-amber-500/20 text-slate-400 text-sm overflow-hidden selection:bg-amber-500 selection:text-black`}
     >
-      {/* Background Ambient Lighting */}
+      {/* Background Image & Ambient Lighting */}
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-        <div className="absolute -bottom-40 left-1/2 -translate-x-1/2 w-[1100px] h-[400px] bg-gradient-to-t from-amber-500/10 via-amber-600/5 to-transparent blur-[140px] rounded-full" />
+        <img
+          src="http://images.unsplash.com/photo-1568535904307-f48b760a39f3?q=80&w=1331&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          alt="Footer Background"
+          className="w-full h-full object-cover object-center opacity-35 filter brightness-75 contrast-125 saturate-50 mix-blend-luminosity"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#030508]/90 via-[#030508]/85 to-[#030508]/95" />
+        <div className="absolute -bottom-40 left-1/2 -translate-x-1/2 w-[1100px] h-[400px] bg-gradient-to-t from-amber-500/20 via-amber-600/10 to-transparent blur-[140px] rounded-full" />
       </div>
 
       <div className="relative z-10 w-full max-w-[1650px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 pt-12 md:pt-16 pb-12">
+        
         {/* Top Newsletter Banner */}
         <div className="p-6 sm:p-8 md:p-10 rounded-3xl bg-gradient-to-r from-slate-950 via-zinc-900 to-slate-950 border border-amber-500/30 shadow-[0_0_30px_rgba(245,158,11,0.1)] mb-12 md:mb-16 flex flex-col lg:flex-row items-center justify-between gap-6">
           <div className="space-y-2 text-center lg:text-left max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-bold bg-amber-500/15 text-amber-300 border border-amber-500/30 uppercase tracking-widest">
-              <Sparkles className="w-3 h-3 text-amber-400 animate-pulse" /> VIP Casting &amp; Event Alerts
+              <Sparkles className="w-3 h-3 text-amber-400 animate-pulse" /> Boom Boom Night In America 2027
             </div>
             <h3 className="text-xl sm:text-2xl md:text-3xl font-serif font-extrabold text-white tracking-wide">
-              Subscribe to Vogue Vibe Scouting Network
+              Subscribe to Vogue Agency Talent Launchpad
             </h3>
             <p className="text-xs sm:text-sm text-slate-400 leading-relaxed font-light">
-              Get exclusive notifications about international casting calls, fashion weeks, and brand scoutings across Paris, Milan, London, New York, and Mumbai.
+              Get exclusive audition alerts for Modeling, Singing, Painting, Acting, and Fashion Designing with USA certification from I Catch Management &amp; Hiba Entertainment USA.
             </p>
           </div>
 
@@ -129,64 +139,64 @@ export const Footer = () => {
           </form>
         </div>
 
-        {/* Main Footer Columns */}
+        {/* Main Footer Columns (5 Columns) */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 sm:gap-10 lg:gap-12">
           
-          {/* Brand Column */}
-          <div className="space-y-5 sm:col-span-2 md:col-span-3 lg:col-span-2 pr-0 lg:pr-8">
+          {/* Brand & Address Column */}
+          <div className="space-y-5 sm:col-span-2 md:col-span-3 lg:col-span-1 pr-0 lg:pr-4">
             <Link href="/" className="flex items-center gap-3 group">
               <div className="relative shrink-0">
                 <Image
                   src="https://res.cloudinary.com/ujpa9sap/image/upload/v1786020022/cropped_circle_image_utg5ck.png"
-                  alt="Vogue Vibe Models Official Logo"
-                  width={48}
-                  height={48}
+                  alt="Vogue Agency Official Logo"
+                  width={44}
+                  height={44}
                   priority
-                  className="w-12 h-12 object-contain rounded-full border border-amber-500/40 shadow-[0_0_20px_rgba(245,158,11,0.25)] group-hover:scale-105 transition-transform duration-300"
+                  className="w-11 h-11 object-contain rounded-full border border-amber-500/40 shadow-[0_0_20px_rgba(245,158,11,0.25)] group-hover:scale-105 transition-transform duration-300"
                 />
               </div>
               <div className="flex flex-col">
-                <div className="flex items-center gap-1.5">
-                  <span className="font-serif text-xl sm:text-2xl tracking-tight text-white font-extrabold">
-                    VOGUE VIBE
+                <div className="flex items-center gap-1">
+                  <span className="font-serif text-lg tracking-tight text-white font-extrabold">
+                    VOGUE AGENCY
                   </span>
-                  <span className="text-[9px] font-bold tracking-widest uppercase text-amber-400 bg-amber-500/15 border border-amber-500/30 px-1.5 py-0.5 rounded">
-                    MODELS
+                  <span className="text-[8px] font-bold tracking-widest uppercase text-amber-400 bg-amber-500/15 border border-amber-500/30 px-1 py-0.5 rounded">
+                    USA 2027
                   </span>
                 </div>
-                <span className="text-[9px] tracking-[0.3em] text-slate-400 uppercase font-medium">
-                  GLOBAL TALENT MANAGEMENT
+                <span className="text-[8px] tracking-[0.2em] text-slate-400 uppercase font-medium">
+                  BOOM BOOM NIGHT IN AMERICA
                 </span>
               </div>
             </Link>
 
-            <p className="text-slate-400 text-xs sm:text-sm leading-relaxed max-w-md font-light">
-              The premier global talent management platform connecting high fashion models, actors, singers, painters, dancers, and musicians with luxury international brands and casting directors.
+            <p className="text-slate-300 text-xs leading-relaxed font-light">
+              India’s premier multi-talent launchpad across 5 pillars: Modeling, Singing, Painting, Acting, and Fashion Designing. Partnered with I Catch Management &amp; Hiba Entertainment USA.
             </p>
 
-            <div className="space-y-2 text-xs sm:text-sm text-slate-400 font-medium">
-              <div className="flex items-center gap-2">
-                <MapPin className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-                <span>BKC Horizon Tower, Bandra Kurla Complex, Mumbai / 5th Ave NYC</span>
+            <div className="space-y-2 text-xs text-slate-300 font-medium">
+              <div className="flex items-start gap-2">
+                <MapPin className="w-3.5 h-3.5 text-amber-400 shrink-0 mt-0.5" />
+                <span>58/78 Near Kairali Homes Building, Ayyanthole, Thrissur, Kerala – 680 003</span>
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-                <a href="mailto:scouting@auracouture.com" className="hover:text-amber-300 transition-colors font-mono">
-                  scouting@auracouture.com
+                <a href="mailto:info@voguevibemodels.com" className="hover:text-amber-300 transition-colors font-mono">
+                  info@voguevibemodels.com
                 </a>
               </div>
               <div className="flex items-center gap-2">
                 <Phone className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-                <span>+91-22-6789-9900 (India) / +1-212-555-0199 (USA)</span>
+                <span>+91 9336289192</span>
               </div>
             </div>
 
-            {/* Social Icons */}
-            <div className="space-y-2 pt-1">
+            {/* Official Social Links */}
+            <div className="space-y-1.5 pt-1">
               <span className="text-[10px] uppercase font-bold tracking-widest text-amber-400 block">
                 Official Social Networks
               </span>
-              <div className="flex flex-wrap items-center gap-2.5">
+              <div className="flex flex-wrap items-center gap-2">
                 {socialLinks.map((social, idx) => (
                   <a
                     key={idx}
@@ -195,63 +205,85 @@ export const Footer = () => {
                     rel="noopener noreferrer"
                     aria-label={social.label}
                     title={social.label}
-                    className={`p-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-400 ${social.hoverColor} hover:bg-slate-900 transition-all duration-300 group`}
+                    className={`p-2 rounded-xl bg-slate-950/80 border border-slate-700 text-slate-400 ${social.hoverColor} hover:bg-slate-900 transition-all duration-300 group backdrop-blur-sm`}
                   >
-                    <social.icon className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                    <social.icon className="w-3.5 h-3.5 group-hover:scale-110 transition-transform" />
                   </a>
                 ))}
               </div>
             </div>
           </div>
 
-          {/* Talent Categories */}
+          {/* 5 Talent Pillars */}
           <div>
             <h4 className="font-serif text-white font-bold text-sm mb-4 tracking-wide uppercase flex items-center gap-2">
               <span className="w-1.5 h-4 bg-amber-500 rounded-full" />
-              Talent Categories
+              5 Talent Categories
             </h4>
             <ul className="space-y-2.5 text-xs sm:text-sm">
               {[
-                { name: 'Fashion Models', href: '/models' },
-                { name: 'Actors & Actresses', href: '/actors' },
-                { name: 'Singers & Vocalists', href: '/singers' },
-                { name: 'Painters & Visual Artists', href: '/painters' },
-                { name: 'Dancers & Choreographers', href: '/dancers' },
-                { name: 'Musicians & Bands', href: '/musicians' },
+                { name: '👠 Modeling Division', href: '/models' },
+                { name: '🎭 Acting & Drama', href: '/actors' },
+                { name: '🎤 Singing & Vocalists', href: '/singers' },
+                { name: '👗 Fashion Designing', href: '/categories' },
+                { name: '🎨 Painting & Fine Art', href: '/painters' },
               ].map((cat, idx) => (
                 <li key={idx}>
-                  <Link href={cat.href} className="hover:text-amber-300 transition-colors flex items-center gap-2 py-0.5">
+                  <Link href={cat.href} className="hover:text-amber-300 transition-colors flex items-center gap-2 py-0.5 text-slate-300">
                     <span className="w-1.5 h-1.5 rounded-full bg-amber-400/80 shrink-0" /> {cat.name}
                   </Link>
                 </li>
               ))}
               <li>
-                <Link href="/become-a-model" className="text-amber-400 hover:text-amber-300 font-semibold transition-colors flex items-center gap-1.5 pt-2">
-                  <Sparkles className="w-3.5 h-3.5 text-amber-400" /> Apply for Scouting
+                <Link href="/become-model#register" className="text-amber-400 hover:text-amber-300 font-semibold transition-colors flex items-center gap-1.5 pt-2">
+                  <Sparkles className="w-3.5 h-3.5 text-amber-400" /> Apply For Registration
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Company & Services */}
+          {/* 📰 Fashion & Career Blogs Column */}
           <div>
             <h4 className="font-serif text-white font-bold text-sm mb-4 tracking-wide uppercase flex items-center gap-2">
               <span className="w-1.5 h-4 bg-amber-500 rounded-full" />
-              Company &amp; Agency
+              Fashion &amp; Career Blogs
             </h4>
             <ul className="space-y-2.5 text-xs sm:text-sm">
               {[
-                { name: 'About Vogue Vibe', href: '/about' },
-                { name: 'Hire Talent Request', href: '/hire-a-model' },
-                { name: 'Contests & Hunts', href: '/contests' },
-                { name: 'Casting Services', href: '/services' },
-                { name: 'Fashion & Career Blog', href: '/blogs' },
-                { name: 'Gallery Archives', href: '/gallery' },
-                { name: 'Contact Support Desk', href: '/ContactPage' },
-                { name: 'Knowledge Base FAQ', href: '/faq' },
+                { name: '📰 Official Blog Magazine', href: '/blogs' },
+                { name: '📸 Model Polaroid Audition Guide', href: '/blogs' },
+                { name: '🎤 Acting Voice Modulation Tips', href: '/blogs' },
+                { name: '🎨 Time-Lapse Painting Proofs', href: '/blogs' },
+                { name: '👗 Fashion Lookbook Strategies', href: '/blogs' },
+                { name: '🏆 USA Certificate Verification', href: '/about#certification' },
+              ].map((blog, idx) => (
+                <li key={idx}>
+                  <Link href={blog.href} className="hover:text-amber-300 transition-colors flex items-center gap-1.5 py-0.5 text-slate-300">
+                    <BookOpen className="w-3 h-3 text-amber-400 shrink-0" />
+                    <span>{blog.name}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Company & Global Auditions */}
+          <div>
+            <h4 className="font-serif text-white font-bold text-sm mb-4 tracking-wide uppercase flex items-center gap-2">
+              <span className="w-1.5 h-4 bg-amber-500 rounded-full" />
+              Company &amp; Launchpad
+            </h4>
+            <ul className="space-y-2.5 text-xs sm:text-sm">
+              {[
+                { name: 'About Us (12 Yrs Legacy)', href: '/about' },
+                { name: 'Contests & Mega Finale', href: '/contests' },
+                { name: 'USA Partner Certification', href: '/about#certification' },
+                { name: 'USA & College Courses', href: '/about#courses' },
+                { name: 'Contact Support Helpline', href: '/ContactPage' },
+                { name: 'Frequently Asked Questions', href: '/faq' },
               ].map((link, idx) => (
                 <li key={idx}>
-                  <Link href={link.href} className="hover:text-amber-300 transition-colors py-0.5 block">
+                  <Link href={link.href} className="hover:text-amber-300 transition-colors py-0.5 block text-slate-300">
                     {link.name}
                   </Link>
                 </li>
@@ -259,7 +291,7 @@ export const Footer = () => {
             </ul>
           </div>
 
-          {/* Legal & Trust Policies */}
+          {/* Legal Policies */}
           <div>
             <h4 className="font-serif text-white font-bold text-sm mb-4 tracking-wide uppercase flex items-center gap-2">
               <span className="w-1.5 h-4 bg-amber-500 rounded-full" />
@@ -268,17 +300,14 @@ export const Footer = () => {
             <ul className="space-y-2.5 text-xs sm:text-sm">
               {[
                 { name: 'Terms & Conditions', href: '/terms-and-conditions' },
+                { name: 'Refund & Fee Policy', href: '/refund-policy' },
+                { name: 'Cancellation Policy', href: '/cancellation-policy' },
                 { name: 'Privacy Policy', href: '/privacy-policy' },
-                { name: 'Cookie Policy', href: '/cookie-policy' },
-                { name: 'Copyright Policy', href: '/copyright-policy' },
-                { name: 'Editorial Policy', href: '/editorial-policy' },
-                { name: 'Scouting Fraud Disclaimer', href: '/disclaimer' },
-                { name: 'DMCA Takedown Notice', href: '/dmca' },
-                { name: 'Refund & Billing Policy', href: '/refund-policy' },
-                { name: 'Physical Shipping Policy', href: '/shipping-policy' },
+                { name: 'Copyright & IP Policy', href: '/copyright-policy' },
+                { name: 'Disclaimer', href: '/disclaimer' },
               ].map((policy, idx) => (
                 <li key={idx}>
-                  <Link href={policy.href} className="hover:text-amber-300 transition-colors py-0.5 block">
+                  <Link href={policy.href} className="hover:text-amber-300 transition-colors py-0.5 block text-slate-300">
                     {policy.name}
                   </Link>
                 </li>
@@ -287,41 +316,27 @@ export const Footer = () => {
           </div>
 
         </div>
-      </div>
 
-      {/* Bottom Bar */}
-      <div className="border-t border-slate-900/90 py-6 bg-[#020305]">
-        <div className="w-full max-w-[1650px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500 font-mono text-center md:text-left">
-          <div className="flex items-center gap-2">
-            <CheckCircle2 className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-            <span>© {new Date().getFullYear()} <strong className="text-slate-300">VOGUE VIBE MODELS</strong> / AURA Couture. All Rights Reserved.</span>
+        {/* Bottom Copyright & USA Entity Verification Strip */}
+        <div className="mt-12 pt-6 border-t border-slate-800/80 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-400 font-mono">
+          <div className="flex flex-col sm:flex-row items-center gap-2 text-center md:text-left">
+            <span>© 2027 VOGUE AGENCY • BOOM BOOM NIGHT IN AMERICA</span>
+            <span className="hidden sm:inline">•</span>
+            <span className="text-amber-400">USA Partner: I Catch Management</span>
           </div>
 
-          <div className="flex items-center gap-4 flex-wrap justify-center">
-            <div className="flex items-center gap-1.5 text-[11px] text-slate-400">
-              <span>Crafted with</span>
-              <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500 inline shrink-0 animate-pulse" />
-              <span>for Global Creative Performers</span>
-            </div>
-
-            <span className="hidden md:inline text-slate-800">•</span>
-
-            {/* Made by Codelura attribution */}
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-950 border border-amber-500/20 text-[11px]">
-              <span className="text-slate-400">Designed &amp; Developed by</span>
-              <a
-                href="https://build.codelura.com/services"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-bold text-amber-400 hover:text-amber-300 hover:underline transition-all flex items-center gap-1"
-              >
-                <span>Codelura</span>
-                <ArrowRight className="w-3 h-3 -rotate-45 text-amber-400" />
-              </a>
-            </div>
+          <div className="flex flex-wrap items-center gap-4 text-[11px] text-slate-400">
+            <span className="flex items-center gap-1 text-emerald-400">
+              <ShieldCheck className="w-3.5 h-3.5" /> 30% TDS Compliant (Section 194B)
+            </span>
+            <span>•</span>
+            <span className="text-amber-300">₹3,00,000 Grand Prize / USA Trip</span>
           </div>
         </div>
+
       </div>
     </footer>
   );
 };
+
+export default Footer;

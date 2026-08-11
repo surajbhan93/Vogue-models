@@ -66,8 +66,8 @@ function AdminFormSkeleton() {
 
 // ─── Fetch Blog Data on Server ───
 async function getBlog(id: string) {
-  const cookieStore = cookies();
-  const token = cookieStore.get("token");
+  const cookieStore = await cookies();
+  const token = cookieStore.get("accessToken");
   
   if (!token) {
     redirect("/admin/login");
@@ -90,17 +90,30 @@ async function getBlog(id: string) {
     return null;
   }
 }
+interface PageProps {
+  params: Promise<{
+    id: string;
+  }>;
+}
 
-export default async function EditBlogPage({ params }: { params: { id: string } }) {
-  const blog = await getBlog(params.id);
-  
+export default async function EditBlogPage({
+  params,
+}: PageProps) {
+  const { id } = await params;
+
+  const blog = await getBlog(id);
+
   if (!blog) {
     notFound();
   }
-  
+
   return (
     <Suspense fallback={<AdminFormSkeleton />}>
-      <AdminBlogForm initialData={blog} isEdit blogId={params.id} />
+      <AdminBlogForm
+        initialData={blog}
+        isEdit
+        blogId={id}
+      />
     </Suspense>
   );
 }

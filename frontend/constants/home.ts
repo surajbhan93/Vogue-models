@@ -64,7 +64,7 @@ export const WHY_CHOOSE_US_DATA = {
   badge: 'The AURA Distinction',
   heading: 'Unrivaled Global Presence & Heritage',
   description: 'Founded in Milan, AURA Couture represents over 400 models worldwide. Our agency maintains exclusive partnerships with Vogue, Dior, Chanel, Saint Laurent, and Tom Ford, ensuring our talent secures prime runway spots and global editorial covers.',
-  image: 'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=1200&q=80',
+  image: 'https://res.cloudinary.com/ujpa9sap/image/upload/v1786390943/ChatGPT_Image_Aug_11_2026_01_12_08_AM_k1vh2c.png',
   safetyTitle: 'Guaranteed Safety & Standards',
   safetyText: 'We prioritize total model well-being, strict legal standard representation, and transparent career management.',
 };

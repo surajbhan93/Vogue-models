@@ -12,7 +12,10 @@ import {
   ShieldCheck,
   Crown,
   ArrowUpRight,
-  LucideIcon
+  Mic,
+  Music,
+  Palette,
+  Drama,
 } from "lucide-react";
 
 export interface ModelProfile {
@@ -46,7 +49,7 @@ interface TalentCategoryPageProps {
   category: 'Model' | 'Actor' | 'Singer' | 'Painter' | 'Dancer' | 'Musician' | 'Other';
   title: string;
   subtitle: string;
-  icon: LucideIcon;
+  icon: 'user' | 'mic' | 'music' | 'palette' | 'drama';
 }
 
 const getAge = (dob?: string) => {
@@ -58,11 +61,20 @@ const getAge = (dob?: string) => {
 };
 
 export default function TalentCategoryListing({
-  category,
+ category,
   title,
   subtitle,
-  icon: CategoryIcon,
+  icon,
 }: TalentCategoryPageProps) {
+const iconMap = {
+    user: User,
+    mic: Mic,
+    music: Music,
+    palette: Palette,
+    drama: Drama,
+  };
+
+  const CategoryIcon = iconMap[icon];
   const [talents, setTalents] = useState<ModelProfile[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [search, setSearch] = useState<string>("");

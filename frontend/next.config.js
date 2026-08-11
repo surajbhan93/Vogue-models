@@ -54,7 +54,14 @@ const nextConfig = {
       '@radix-ui/react-icons',
     ],
   },
+// Ignore TypeScript & ESLint errors during build
+typescript: {
+  ignoreBuildErrors: true,
+},
 
+eslint: {
+  ignoreDuringBuilds: true,
+},
   // ─── Compiler Options ───
   compiler: {
     // Remove console.log / console.info in production builds

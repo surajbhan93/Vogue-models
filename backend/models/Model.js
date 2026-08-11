@@ -214,7 +214,6 @@ const modelSchema = new mongoose.Schema({
     enum: ['Model', 'Actor', 'Singer', 'Painter', 'Dancer', 'Musician', 'Other'],
     default: 'Model',
     required: [true, 'Category is required'],
-    index: true,
   },
   name: {
     type: String,
@@ -295,7 +294,6 @@ const modelSchema = new mongoose.Schema({
     unique: true,
     lowercase: true,
     trim: true,
-    index: true,
   },
 
   // 🔹 Professional Details
@@ -379,8 +377,6 @@ const modelSchema = new mongoose.Schema({
 });
 
 // 🔹 Indexes for fast searching
-modelSchema.index({ email: 1 });
-modelSchema.index({ phone: 1 });
 modelSchema.index({ category: 1 });
 modelSchema.index({ status: 1 });
 modelSchema.index({ role: 1 });

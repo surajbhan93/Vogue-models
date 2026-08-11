@@ -1,7 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
-import { generatePageMetadata, generateWebPageSchema } from '@/lib/metadata/pageMetadata';
+import { generatePageMetadata } from '@/lib/metadata/pageMetadata';
 import { PageHero } from '@/components/common/PageHero';
 import { PageContainer } from '@/components/common/PageContainer';
 import { SectionTitle } from '@/components/common/SectionTitle';
@@ -20,395 +19,247 @@ import {
   Clock,
   DollarSign,
   AlertTriangle,
-  UserCheck,
-  Lock,
-  ArrowRight,
-  ShieldAlert,
+  Award,
+  Globe,
+  Sparkles,
+  Camera,
+  Film,
+  Mic,
+  Palette,
+  Scissors,
 } from 'lucide-react';
 
-// -----------------------------------------------------------------------
-// SEO METADATA
-// -----------------------------------------------------------------------
 export const metadata = generatePageMetadata({
-  title: 'Terms & Conditions of Representation & Usage | AURA Couture',
+  title: 'Official Terms & Conditions 2027 | Vogue Agency & Boom Boom Night In America',
   description:
-    'Official Terms and Conditions of Representation and Website Usage for AURA Couture and Vogue Vibe Models. Comprehensive legal terms governing talent scouting agreements, client booking contracts, daily rates, overtime, media buyout licenses, and on-set safety standards across India, USA, and global markets.',
+    'Comprehensive legal Terms & Conditions for Vogue Agency / Boom Boom Night In America 2027 covering Modeling, Singing, Painting, Fashion Designing, and Acting categories, 4-stage online auditions, ₹3,00,000 mega prizes, 30% TDS rules, and I Catch Management USA certifications.',
   path: '/terms-and-conditions',
   keywords: [
-    'Terms and Conditions',
-    'AURA Couture Representation Terms',
-    'Modeling Booking Contract Rules',
-    'Talent Management Terms 2026',
-    'Overtime & Daily Rate Policy',
-    'Media Buyout Licensing Terms',
-    'On-Set Talent Safety Mandate',
-    'Governing Law Bombay New York',
+    'Vogue Agency Terms and Conditions',
+    'Boom Boom Night In America 2027 Rules',
+    'Multi-Talent Hunt Terms',
+    'I Catch Management USA Certification',
+    '30 Percent TDS Cash Prize Rule',
+    'Modeling Acting Singing Contest Terms',
   ],
 });
 
-// -----------------------------------------------------------------------
-// FAQ DATA FOR AEO / FAQ SCHEMA
-// -----------------------------------------------------------------------
-const termsFaqs = [
-  {
-    q: 'Does submitting a scouting application create a binding contract with AURA Couture?',
-    a: 'No. Submitting digital polaroids through our website constitutes an initial scouting inquiry. Official agency representation is legally binding only upon the execution of a written Management Agreement signed by an authorized executive of AURA Couture.',
-  },
-  {
-    q: 'What are the standard working hours and overtime rules for client bookings?',
-    a: 'Standard shoot bookings are structured for 8 hours (half-day 4 hours). Overtime beyond 8 hours is billed at 1.5x the hourly rate, and time beyond 10 hours is billed at 2.0x the hourly rate. Meal breaks are mandatory every 4 hours.',
-  },
-  {
-    q: 'What happens if a client uses talent imagery beyond the contracted license period?',
-    a: 'Unauthorized media usage beyond the agreed territory, media scope, or duration constitutes intentional copyright infringement. Clients will be billed automatic statutory penalty fees equal to 200% to 500% of the original buyout rate.',
-  },
-  {
-    q: 'What safety standards are guaranteed for performers on production sets?',
-    a: 'AURA Couture enforces a zero-tolerance policy against physical, verbal, or sexual harassment. Performers have the absolute legal right to halt work and leave any set that violates safety, modesty, or chaperone protocols without financial penalty.',
-  },
-  {
-    q: 'Which court jurisdiction governs legal disputes under these terms?',
-    a: 'Disputes concerning Asian and Indian operations are governed by the High Court of Judicature at Bombay, India. Disputes concerning North American and European operations are governed by the Supreme Court of the State of New York, USA.',
-  },
-];
-
-function buildFaqSchema() {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: termsFaqs.map((f) => ({
-      '@type': 'Question',
-      name: f.q,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: f.a,
-      },
-    })),
-  };
-}
-
-export default function TermsPage() {
-  const pageSchema = generateWebPageSchema(
-    'Terms & Conditions of Representation & Usage',
-    'Official terms governing talent scouting representation, client booking agreements, daily rates, media buyouts, and platform usage.',
-    '/terms-and-conditions'
-  );
-  const faqSchema = buildFaqSchema();
-
+export default function TermsAndConditionsPage() {
   return (
-    <>
-      {/* Schema Injection */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(pageSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-
+    <main className="min-h-screen bg-[#030508] text-slate-300 selection:bg-amber-500 selection:text-black">
+      {/* Page Hero */}
       <PageHero
-        title="TERMS & CONDITIONS OF REPRESENTATION"
-        subtitle="Comprehensive legal rules governing talent scouting representation agreements, client booking contracts, media licensing rights, and website usage."
-        badge="GLOBAL LEGAL CHARTER • CONTRACT STANDARDS"
-        bgImage="https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=2000&q=90"
+        badge="Official Legal Document"
+        title="Terms & Conditions"
+        subtitle="Official Rules, Regulations, Judging Criteria, and Participant Guidelines for Vogue Agency / Boom Boom Night In America 2027 Multi-Talent Launchpad."
         breadcrumbs={[{ label: 'Terms & Conditions' }]}
       />
 
-      <PageContainer>
-        {/* ---------------------------------------------------------- */}
-        {/* 1. EXECUTIVE SUMMARY & STATS                                 */}
-        {/* ---------------------------------------------------------- */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-7 space-y-6">
-            <SectionTitle
-              badge="LEGAL FRAMEWORK"
-              title="Binding Agreements Built on Trust & Integrity"
-              subtitle="AURA Couture enforces transparent contract standards for talent and brand clients worldwide."
-            />
-            <p className="text-zinc-300 font-light leading-relaxed text-sm md:text-base">
-              Welcome to <strong className="text-white">AURA Couture</strong> (operating the{' '}
-              <strong className="text-gold-400">Vogue Vibe Models</strong> global network). By accessing our website at <span className="text-gold-400 font-mono">auracouture.com</span>, applying for talent scouting representation, or booking talent through our agency desks in <strong className="text-white">Paris, Milan, London, New York, Mumbai, or Delhi</strong>, you agree to be bound by these Master Terms & Conditions.
-            </p>
-            <p className="text-zinc-300 font-light leading-relaxed text-sm md:text-base">
-              These terms establish legal protections for represented fashion models, actors, singers, dancers, painters, and musicians, as well as binding operational rules for brand clients, production managers, and website visitors.
-            </p>
+      <PageContainer className="py-16 space-y-16">
+        
+        {/* Intro Overview Banner */}
+        <div className="p-8 rounded-3xl bg-zinc-950 border border-amber-500/30 shadow-[0_0_30px_rgba(212,175,55,0.15)] space-y-4">
+          <div className="flex items-center gap-3 text-amber-400 font-mono text-xs uppercase tracking-widest font-bold">
+            <Award className="w-4 h-4" />
+            <span>Official Event Announcement &amp; Legal Binding</span>
           </div>
-
-          <div className="lg:col-span-5 grid grid-cols-2 gap-4">
-            <div className="glass-panel p-5 border border-gold-500/20 rounded-md space-y-2">
-              <Gavel className="w-7 h-7 text-gold-400" />
-              <h3 className="font-serif text-lg font-bold text-white">Binding Terms</h3>
-              <p className="text-xs text-zinc-400">Enforceable agreements for clients and talent.</p>
-            </div>
-            <div className="glass-panel p-5 border border-gold-500/20 rounded-md space-y-2">
-              <ShieldCheck className="w-7 h-7 text-gold-400" />
-              <h3 className="font-serif text-lg font-bold text-white">₹0 Scouting Fee</h3>
-              <p className="text-xs text-zinc-400">Zero upfront fees for talent representation.</p>
-            </div>
-            <div className="glass-panel p-5 border border-gold-500/20 rounded-md space-y-2">
-              <Clock className="w-7 h-7 text-gold-400" />
-              <h3 className="font-serif text-lg font-bold text-white">Overtime Rules</h3>
-              <p className="text-xs text-zinc-400">Strict 8-hr day & overtime billing policies.</p>
-            </div>
-            <div className="glass-panel p-5 border border-gold-500/20 rounded-md space-y-2">
-              <ShieldAlert className="w-7 h-7 text-gold-400" />
-              <h3 className="font-serif text-lg font-bold text-white">Set Safety</h3>
-              <p className="text-xs text-zinc-400">Zero-tolerance harassment & safety policy.</p>
-            </div>
-          </div>
-        </div>
-
-        {/* RELATED CONTENT FEATURED IMAGES */}
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="relative h-72 rounded-xl overflow-hidden border border-gold-500/20 glass-panel group">
-            <Image
-              src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1200&q=90"
-              alt="Legal Agency Contracts & Corporate Handshake"
-              fill
-              className="object-cover group-hover:scale-105 transition-transform duration-500 filter brightness-90"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent p-6 flex flex-col justify-end">
-              <span className="text-xs font-bold text-gold-400 uppercase tracking-widest">Executive Representation Contracts</span>
-              <h3 className="text-lg font-bold text-white font-serif">Transparent Talent & Client Agreements</h3>
-            </div>
-          </div>
-
-          <div className="relative h-72 rounded-xl overflow-hidden border border-gold-500/20 glass-panel group">
-            <Image
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1200&q=90"
-              alt="Talent Representation & Client Booking Compliance"
-              fill
-              className="object-cover group-hover:scale-105 transition-transform duration-500 filter brightness-90"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent p-6 flex flex-col justify-end">
-              <span className="text-xs font-bold text-gold-400 uppercase tracking-widest">Client Booking Compliance</span>
-              <h3 className="text-lg font-bold text-white font-serif">Protected On-Set Working Conditions</h3>
-            </div>
-          </div>
-        </div>
-
-        {/* TABLE OF CONTENTS */}
-        <div className="mt-16 glass-panel border border-gold-500/20 rounded-md p-8 bg-zinc-950/80">
-          <h2 className="font-serif text-lg font-bold text-white flex items-center mb-4">
-            <FileText className="w-5 h-5 text-gold-400 mr-2" />
-            Table of Contents
+          <h2 className="font-serif text-2xl sm:text-3xl font-bold text-white">
+            Welcome to Vogue Agency / Boom Boom Night In America 2027
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 text-xs md:text-sm text-zinc-300">
-            <a href="#scouting-representation" className="hover:text-gold-400 transition-colors flex items-center">
-              <ArrowRight className="w-3 h-3 text-gold-400 mr-1.5 shrink-0" />
-              1. Scouting & Agency Representation Terms
-            </a>
-            <a href="#client-booking-rules" className="hover:text-gold-400 transition-colors flex items-center">
-              <ArrowRight className="w-3 h-3 text-gold-400 mr-1.5 shrink-0" />
-              2. Client Booking Rules & Overtime Rates
-            </a>
-            <a href="#usage-licensing-penalties" className="hover:text-gold-400 transition-colors flex items-center">
-              <ArrowRight className="w-3 h-3 text-gold-400 mr-1.5 shrink-0" />
-              3. Usage Licensing & Exceeding Buyout Penalties
-            </a>
-            <a href="#onset-safety" className="hover:text-gold-400 transition-colors flex items-center">
-              <ArrowRight className="w-3 h-3 text-gold-400 mr-1.5 shrink-0" />
-              4. On-Set Health & Anti-Harassment Mandates
-            </a>
-            <a href="#intellectual-property-terms" className="hover:text-gold-400 transition-colors flex items-center">
-              <ArrowRight className="w-3 h-3 text-gold-400 mr-1.5 shrink-0" />
-              5. Intellectual Property & Anti-Scraping
-            </a>
-            <a href="#governing-jurisdiction" className="hover:text-gold-400 transition-colors flex items-center">
-              <ArrowRight className="w-3 h-3 text-gold-400 mr-1.5 shrink-0" />
-              6. Limitation of Liability & Court Jurisdiction
-            </a>
-            <a href="#terms-faqs" className="hover:text-gold-400 transition-colors flex items-center">
-              <ArrowRight className="w-3 h-3 text-gold-400 mr-1.5 shrink-0" />
-              7. Frequently Asked Questions
-            </a>
-          </div>
+          <p className="text-sm text-zinc-300 leading-relaxed font-light">
+            By registering and participating in this premier multi-talent launchpad across <strong>Modeling, Singing, Painting, Fashion Designing, and Acting</strong>, all participants and their legal guardians agree to strictly abide by the following official rules, terms, and conditions established by The Organizers (Vogue Agency in collaboration with registered USA entities <strong>I Catch Management, Hiba Entertainment USA, and Kash Patel Production</strong>).
+          </p>
         </div>
 
-        {/* ---------------------------------------------------------- */}
-        {/* SECTION 1: SCOUTING & REPRESENTATION TERMS                  */}
-        {/* ---------------------------------------------------------- */}
-        <section id="scouting-representation" className="mt-20 space-y-6">
-          <div className="flex items-center space-x-3 border-b border-gold-500/20 pb-4">
-            <div className="w-10 h-10 rounded-full border border-gold-500/40 flex items-center justify-center shrink-0">
-              <UserCheck className="w-5 h-5 text-gold-400" />
-            </div>
-            <div>
-              <span className="text-xs font-bold uppercase tracking-widest text-gold-400 block">Section 01</span>
-              <h2 className="font-serif text-2xl font-bold text-white">Scouting & Agency Representation Terms</h2>
-            </div>
-          </div>
-
-          <div className="prose prose-invert max-w-none text-zinc-300 space-y-4 text-sm md:text-base leading-relaxed">
-            <p>
-              Submitting digital polaroids, comp cards, or contact details through our website constitutes an application for talent evaluation. Representation terms are governed as follows:
-            </p>
-            <ul className="list-disc pl-6 space-y-2.5 text-xs md:text-sm text-zinc-300">
-              <li>
-                <strong className="text-white">Non-Binding Scouting Submissions:</strong> Application submission does not create a binding management contract or guarantee representation. Representation is formalized exclusively through a written Management Agreement signed by an authorized executive.
-              </li>
-              <li>
-                <strong className="text-white">Zero Upfront Representation Fees:</strong> AURA Couture NEVER charges application fees, registration fees, mandatory portfolio photo fees, or sign-up charges. Commission (standard 20%) is deducted only from paid client bookings.
-              </li>
-              <li>
-                <strong className="text-white">Minor Applicants (Under 18):</strong> All scouting communications, contract negotiations, and booking agreements for minors require countersignatures from a parent or legal guardian.
-              </li>
-            </ul>
-          </div>
-        </section>
-
-        {/* ---------------------------------------------------------- */}
-        {/* SECTION 2: CLIENT BOOKING RULES & OVERTIME RATES            */}
-        {/* ---------------------------------------------------------- */}
-        <section id="client-booking-rules" className="mt-20 space-y-6">
-          <div className="flex items-center space-x-3 border-b border-gold-500/20 pb-4">
-            <div className="w-10 h-10 rounded-full border border-gold-500/40 flex items-center justify-center shrink-0">
-              <Clock className="w-5 h-5 text-gold-400" />
-            </div>
-            <div>
-              <span className="text-xs font-bold uppercase tracking-widest text-gold-400 block">Section 02</span>
-              <h2 className="font-serif text-2xl font-bold text-white">Client Booking Rules, Hours & Overtime Policy</h2>
-            </div>
-          </div>
-
-          <div className="prose prose-invert max-w-none text-zinc-300 space-y-4 text-sm md:text-base leading-relaxed">
-            <p>
-              Clients booking talent through AURA Couture agree to strictly adhere to standardized shoot duration and overtime rate guidelines:
-            </p>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
-              <div className="glass-panel p-6 border border-gold-500/20 rounded-md space-y-3">
-                <h3 className="font-serif text-base font-bold text-white">Standard Shoot Day</h3>
-                <p className="text-xs text-zinc-400 leading-relaxed">
-                  Full day rate covers up to <strong className="text-white">8 hours</strong> (including 1-hour catered meal break). Half day rate covers up to 4 hours.
-                </p>
-              </div>
-
-              <div className="glass-panel p-6 border border-gold-500/20 rounded-md space-y-3">
-                <h3 className="font-serif text-base font-bold text-white">Overtime Multipliers</h3>
-                <p className="text-xs text-zinc-400 leading-relaxed">
-                  Hours 8 to 10 are billed at <strong className="text-white">1.5x hourly rate</strong>. Hours exceeding 10 are billed at <strong className="text-white">2.0x hourly rate</strong>.
-                </p>
-              </div>
-
-              <div className="glass-panel p-6 border border-gold-500/20 rounded-md space-y-3">
-                <h3 className="font-serif text-base font-bold text-white">Fitting & Travel Rates</h3>
-                <p className="text-xs text-zinc-400 leading-relaxed">
-                  Wardrobe fitting sessions are billed at 50% of hourly rate. Travel days outside home city hubs are billed at 50% day rate plus per diem.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ---------------------------------------------------------- */}
-        {/* SECTION 4: ON-SET HEALTH & ANTI-HARASSMENT MANDATES         */}
-        {/* ---------------------------------------------------------- */}
-        <section id="onset-safety" className="mt-20 space-y-6">
-          <div className="flex items-center space-x-3 border-b border-gold-500/20 pb-4">
-            <div className="w-10 h-10 rounded-full border border-gold-500/40 flex items-center justify-center shrink-0">
-              <ShieldAlert className="w-5 h-5 text-gold-400" />
-            </div>
-            <div>
-              <span className="text-xs font-bold uppercase tracking-widest text-gold-400 block">Section 04</span>
-              <h2 className="font-serif text-2xl font-bold text-white">On-Set Health, Safety & Anti-Harassment Mandates</h2>
-            </div>
-          </div>
-
-          <div className="glass-panel p-8 border border-gold-500/30 rounded-md bg-zinc-950/90 space-y-4">
-            <h3 className="font-serif text-lg font-bold text-white flex items-center">
-              <CheckCircle2 className="w-5 h-5 text-emerald-400 mr-2" />
-              Zero-Tolerance Safety Policy
-            </h3>
-            <p className="text-zinc-200 text-sm md:text-base leading-relaxed font-light">
-              AURA Couture maintains a zero-tolerance policy against physical abuse, verbal harassment, sexual misconduct, or un-chaperoned minor shoots. Production clients must provide secure changing areas, adequate hydration, temperature-controlled environments, and chaperoned access.
-            </p>
-            <p className="text-zinc-400 text-xs md:text-sm leading-relaxed">
-              Talent and booking agents retain the immediate legal right to halt performance and leave any set that violates safety or modesty rules without financial penalty or breach of contract.
-            </p>
-          </div>
-        </section>
-
-        {/* ---------------------------------------------------------- */}
-        {/* SECTION 7: FREQUENTLY ASKED QUESTIONS (FAQ SCHEMA)          */}
-        {/* ---------------------------------------------------------- */}
-        <section id="terms-faqs" className="mt-20 space-y-6">
+        {/* 1. Eligibility Criteria */}
+        <section className="space-y-6">
           <SectionTitle
-            badge="COMMON INQUIRIES"
-            title="Frequently Asked Questions"
-            subtitle="Clear answers regarding representation terms, overtime, and contract enforcement."
-            centered
+            badge="Section 1"
+            title="1. Eligibility Criteria & Age Boundaries"
+            subtitle="Participation guidelines for Junior and Senior talent categories."
           />
-          <div className="max-w-3xl mx-auto mt-10 space-y-4">
-            {termsFaqs.map(({ q, a }) => (
-              <details
-                key={q}
-                className="glass-panel border border-gold-500/20 rounded-md p-6 group"
-              >
-                <summary className="font-serif text-base md:text-lg font-bold text-white cursor-pointer list-none flex items-center justify-between gap-4">
-                  {q}
-                  <span className="text-gold-400 text-xl leading-none group-open:rotate-45 transition-transform">
-                    +
-                  </span>
-                </summary>
-                <p className="text-zinc-400 text-sm leading-relaxed mt-3">{a}</p>
-              </details>
-            ))}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="p-6 rounded-2xl bg-zinc-950 border border-zinc-800 space-y-3">
+              <h3 className="text-white font-bold text-lg font-serif flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-amber-400" /> Age Group Boundaries
+              </h3>
+              <ul className="space-y-2 text-xs text-zinc-300 font-light leading-relaxed">
+                <li>• <strong>Master Age Limit:</strong> Open to candidates within the age group of 14 to 35 years at the time of registration.</li>
+                <li>• <strong>Junior Category (Age 10 to 15 Years):</strong> Dedicated focus for Painting, Singing, and Acting.</li>
+                <li>• <strong>Senior Category (Age 16 to 35 Years):</strong> Prime career launchpad for Modeling, Fashion Designing, Acting, and Singing.</li>
+                <li>• <strong>Identity Proof:</strong> Participants must submit valid government-issued ID (Aadhaar Card, Passport, or Driving License) during registration.</li>
+              </ul>
+            </div>
+
+            <div className="p-6 rounded-2xl bg-zinc-950 border border-zinc-800 space-y-3">
+              <h3 className="text-white font-bold text-lg font-serif flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-emerald-400" /> Minor Legal Consent (Under 18)
+              </h3>
+              <ul className="space-y-2 text-xs text-zinc-300 font-light leading-relaxed">
+                <li>• Minor participants (under 18 years) must provide parent or legal guardian phone number and written consent.</li>
+                <li>• Any cash prize or international travel reward won by a minor will legally be handed over to their parents/legal guardians.</li>
+                <li>• Accuracy of information is mandatory. Any false identity will lead to immediate disqualification.</li>
+              </ul>
+            </div>
           </div>
         </section>
 
-        {/* CONTACT LEGAL COUNSEL DESK */}
-        <div className="mt-24 glass-panel border border-gold-500/20 rounded-md p-8 md:p-12 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-          <div className="space-y-4">
-            <h3 className="font-serif text-2xl font-bold text-white">
-              Contact Agency Legal Counsel & Contract Desk
-            </h3>
-            <p className="text-zinc-400 text-sm leading-relaxed">
-              For questions regarding agency contracts, client booking agreements, or legal terms, reach out to our legal department:
+        {/* 2. Registration & Evaluation Fee Structure */}
+        <section className="space-y-6">
+          <SectionTitle
+            badge="Section 2"
+            title="2. 4-Stage Audition & Fee Structure"
+            subtitle="Transparent registration steps and fee breakdown."
+          />
+          <div className="p-8 rounded-3xl bg-zinc-950 border border-zinc-800 space-y-6">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="p-4 rounded-xl bg-zinc-900 border border-amber-500/20 text-center space-y-1">
+                <span className="text-xs font-mono text-amber-400 uppercase font-bold">Stage 1</span>
+                <h4 className="text-white font-bold text-base">Free Registration</h4>
+                <p className="text-[11px] text-zinc-400">Fill details &amp; select category</p>
+              </div>
+              <div className="p-4 rounded-xl bg-zinc-900 border border-amber-500/20 text-center space-y-1">
+                <span className="text-xs font-mono text-amber-400 uppercase font-bold">Step 2 Fee</span>
+                <h4 className="text-white font-bold text-base">₹ 999 Evaluation</h4>
+                <p className="text-[11px] text-zinc-400">Strictly non-refundable &amp; non-transferable</p>
+              </div>
+              <div className="p-4 rounded-xl bg-zinc-900 border border-amber-500/20 text-center space-y-1">
+                <span className="text-xs font-mono text-amber-400 uppercase font-bold">Step 3 Masterclass</span>
+                <h4 className="text-white font-bold text-base">₹ 1,499 Training</h4>
+                <p className="text-[11px] text-zinc-400">Free USA expert grooming workshop</p>
+              </div>
+            </div>
+            <p className="text-xs text-zinc-400 leading-relaxed font-light">
+              *All registration fees are strictly non-refundable and non-transferable under any circumstances, including voluntary withdrawal, technical failure, or disqualification.
             </p>
-            <div className="space-y-2 text-xs md:text-sm text-zinc-300 pt-2">
-              <p className="flex items-center">
-                <Mail className="w-4 h-4 text-gold-400 mr-2" />
-                legal@auracouture.com
+          </div>
+        </section>
+
+        {/* 3. Competition Categories & Judging Rules */}
+        <section className="space-y-6">
+          <SectionTitle
+            badge="Section 3"
+            title="3. Category Judging Criteria & Guidelines"
+            subtitle="Online submission rules across all 5 talent categories."
+          />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            {/* Modeling */}
+            <div className="p-6 rounded-2xl bg-zinc-950 border border-zinc-800 space-y-2">
+              <div className="flex items-center gap-2 text-amber-400 font-bold text-sm">
+                <Camera className="w-4 h-4" /> Modeling
+              </div>
+              <p className="text-xs text-zinc-300 leading-relaxed font-light">
+                Submit a 30-sec home runway walk video + 30-sec spoken intro video. Shortlisted models attend a live Zoom runway walk &amp; jury Q&amp;A.
               </p>
-              <p className="flex items-center">
-                <Phone className="w-4 h-4 text-gold-400 mr-2" />
-                +91-22-6789-9900 (India) / +1-212-555-0199 (USA)
+            </div>
+
+            {/* Singing */}
+            <div className="p-6 rounded-2xl bg-zinc-950 border border-zinc-800 space-y-2">
+              <div className="flex items-center gap-2 text-amber-400 font-bold text-sm">
+                <Mic className="w-4 h-4" /> Singing &amp; Vocalists
+              </div>
+              <p className="text-xs text-zinc-300 leading-relaxed font-light">
+                Submit 1-min raw unedited singing video (no mic, auto-tune, or studio filters). Finalists perform Live via Zoom Video Conference.
               </p>
-              <p className="flex items-center">
-                <MapPin className="w-4 h-4 text-gold-400 mr-2" />
-                BKC Horizon Tower, Bandra Kurla Complex, Mumbai / 500 5th Ave NYC
+            </div>
+
+            {/* Painting */}
+            <div className="p-6 rounded-2xl bg-zinc-950 border border-zinc-800 space-y-2">
+              <div className="flex items-center gap-2 text-amber-400 font-bold text-sm">
+                <Palette className="w-4 h-4" /> Painting &amp; Fine Art
+              </div>
+              <p className="text-xs text-zinc-300 leading-relaxed font-light">
+                Submit a 1-min time-lapse video of painting creation + final photo proof. Finalists complete a Live 2-Hour Theme Painting Session on camera.
+              </p>
+            </div>
+
+            {/* Fashion Designing */}
+            <div className="p-6 rounded-2xl bg-zinc-950 border border-zinc-800 space-y-2">
+              <div className="flex items-center gap-2 text-amber-400 font-bold text-sm">
+                <Scissors className="w-4 h-4" /> Fashion Designing
+              </div>
+              <p className="text-xs text-zinc-300 leading-relaxed font-light">
+                Submit a digital lookbook (3 to 5 photos/video) of stitched garments on mannequin or model. Present concept live to the jury panel.
+              </p>
+            </div>
+
+            {/* Acting */}
+            <div className="p-6 rounded-2xl bg-zinc-950 border border-zinc-800 space-y-2 lg:col-span-2">
+              <div className="flex items-center gap-2 text-amber-400 font-bold text-sm">
+                <Film className="w-4 h-4" /> Acting Skills (Judging Criteria)
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-zinc-300 font-light pt-1">
+                <div>• <strong>Voice Modulation:</strong> Projection, tone, &amp; dialogue pacing.</div>
+                <div>• <strong>Facial Expressions:</strong> Emotional authenticity &amp; micro-expressions.</div>
+                <div>• <strong>Body Language:</strong> Posture, movement, &amp; physical stage control.</div>
+                <div>• <strong>Characterization &amp; Stage Presence:</strong> Command over audience.</div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        {/* 4. USA Certification & Prizes */}
+        <section className="space-y-6">
+          <SectionTitle
+            badge="Section 4"
+            title="4. USA Certification & Mega Cash Prizes"
+            subtitle="Details on I Catch Management certification, 30% TDS, and USA Trip rewards."
+          />
+          <div className="p-8 rounded-3xl bg-zinc-950 border border-amber-500/30 space-y-6">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+              
+              <div className="p-5 rounded-2xl bg-zinc-900 border border-amber-500/20 space-y-2">
+                <span className="text-xs font-mono font-bold text-amber-400 uppercase">1st Prize Mega Winner</span>
+                <h4 className="text-white font-serif text-xl font-bold">₹ 3,00,000 Cash OR USA Trip</h4>
+                <p className="text-xs text-zinc-400 leading-relaxed font-light">
+                  Mega Winner in each category secures ₹3 Lakh OR 5-Day Sponsored USA Trip to perform live at Boom Boom Night In America with Bollywood stars.
+                </p>
+              </div>
+
+              <div className="p-5 rounded-2xl bg-zinc-900 border border-amber-500/20 space-y-2">
+                <span className="text-xs font-mono font-bold text-amber-400 uppercase">2nd &amp; 3rd Prizes</span>
+                <h4 className="text-white font-serif text-xl font-bold">₹ 1,75,000 / ₹ 1,00,000</h4>
+                <p className="text-xs text-zinc-400 leading-relaxed font-light">
+                  2nd Prize winner receives ₹1,75,000 and 3rd Prize receives ₹1,00,000. Plus 5 Consolation Prizes of ₹20,000 in each category.
+                </p>
+              </div>
+
+              <div className="p-5 rounded-2xl bg-zinc-900 border border-amber-500/20 space-y-2">
+                <span className="text-xs font-mono font-bold text-amber-400 uppercase">USA Certification</span>
+                <h4 className="text-white font-serif text-xl font-bold">I Catch Management (USA)</h4>
+                <p className="text-xs text-zinc-400 leading-relaxed font-light">
+                  All participants completing mandatory rounds receive verifiable Digital Certificates (PDF) with unique ID from I Catch Management (USA).
+                </p>
+              </div>
+
+            </div>
+
+            <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 text-xs text-amber-300 space-y-1">
+              <strong className="block text-amber-200">Taxation (30% TDS) &amp; Travel Conditions:</strong>
+              <p className="font-light">
+                In accordance with Indian Tax Laws (Section 194B of Income Tax Act 1961), a 30% TDS applies to all cash prizes exceeding ₹10,000. The USA trip includes economy air travel and standard hotel accommodation. Passport and Visa fees must be borne by the participant. If visa is rejected, winner receives cash prize net of TDS.
               </p>
             </div>
           </div>
+        </section>
 
-          <div className="flex flex-col sm:flex-row md:flex-col lg:flex-row gap-4 justify-end">
-            <Link
-              href="/ContactPage"
-              className="px-6 py-3.5 rounded-md font-semibold text-xs uppercase tracking-wider bg-gold-500 hover:bg-gold-400 text-zinc-950 transition-all text-center"
-            >
-              Contact Legal Desk
-            </Link>
-            <Link
-              href="/models"
-              className="px-6 py-3.5 rounded-md font-semibold text-xs uppercase tracking-wider bg-zinc-900 border border-gold-500/30 text-white hover:bg-zinc-800 transition-all text-center"
-            >
-              Browse Talent Roster
-            </Link>
+        {/* 5. Contact & Jurisdiction */}
+        <section className="p-8 rounded-3xl bg-zinc-950 border border-zinc-800 space-y-4">
+          <h3 className="font-serif text-xl font-bold text-white flex items-center gap-2">
+            <Building2 className="w-5 h-5 text-amber-400" /> Contact &amp; Legal Jurisdiction
+          </h3>
+          <p className="text-xs text-zinc-300 leading-relaxed font-light">
+            Any legal disputes arising out of this event shall be subject exclusively to the jurisdiction of the courts located in Thrissur, Kerala, India.
+          </p>
+          <div className="pt-2 text-xs text-zinc-300 font-mono space-y-1">
+            <p><strong>Official Address:</strong> 58/78 Near Kairali Homes Building, Near Kurinjakkal Lane, Ayyanthole, Thrissur, Kerala – 680 003</p>
+            <p><strong>Official Email:</strong> info@voguevibemodels.com | <strong>Helpline:</strong> +91 9336289192</p>
           </div>
-        </div>
+        </section>
 
-        {/* CTA Section */}
-        <CTASection
-          title="Work With Vogue Vibe Models"
-          description="Book elite talent under legally transparent contracts and protected working conditions."
-          primaryButtonText="Browse Talent Roster"
-          primaryButtonHref="/models"
-          secondaryButtonText="Become a Talent"
-          secondaryButtonHref="/become-a-model"
-        />
       </PageContainer>
-    </>
+    </main>
   );
 }

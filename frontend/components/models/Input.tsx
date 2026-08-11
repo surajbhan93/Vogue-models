@@ -20,15 +20,15 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         {label && (
           <label
             htmlFor={inputId}
-            className="block text-xs uppercase tracking-widest font-semibold text-gray-300"
+            className="block text-xs uppercase tracking-widest font-semibold text-zinc-300"
           >
-            {label} {props.required && <span className="text-gold">*</span>}
+            {label} {props.required && <span className="text-amber-400">*</span>}
           </label>
         )}
 
         <div className="relative flex items-center">
           {leftIcon && (
-            <div className="absolute left-3.5 text-gray-400 pointer-events-none flex items-center justify-center">
+            <div className="absolute left-3.5 text-zinc-400 pointer-events-none flex items-center justify-center">
               {leftIcon}
             </div>
           )}
@@ -37,22 +37,24 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             id={inputId}
             ref={ref}
             className={`
-             w-full
-    border
-    border-gray-400
-    bg-white
-    text-black
-    placeholder:text-gray-500
-    px-4
-    py-3
-    rounded-lg
-  "
+              w-full
+              border
+              bg-zinc-950/90
+              text-white
+              placeholder:text-zinc-600
+              px-4
+              py-3.5
+              rounded-xl
+              text-sm
+              transition-all
+              duration-200
+              focus:outline-none
               ${leftIcon ? 'pl-11' : ''}
               ${rightIcon ? 'pr-11' : ''}
               ${
                 error
                   ? 'border-red-500 focus:border-red-400 focus:ring-1 focus:ring-red-500'
-                  : 'border-white/10 focus:border-gold focus:ring-1 focus:ring-gold/40 hover:border-white/20'
+                  : 'border-zinc-800 focus:border-amber-400 focus:ring-1 focus:ring-amber-400/50 hover:border-zinc-700'
               }
               ${className}
             `}
@@ -60,7 +62,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           />
 
           {rightIcon && (
-            <div className="absolute right-3.5 text-gray-400 flex items-center justify-center">
+            <div className="absolute right-3.5 text-zinc-400 flex items-center justify-center">
               {rightIcon}
             </div>
           )}
@@ -74,7 +76,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         )}
 
         {helperText && !error && (
-          <p className="text-xs text-gray-400">{helperText}</p>
+          <p className="text-xs text-zinc-400">{helperText}</p>
         )}
       </div>
     );

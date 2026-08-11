@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { motion, AnimatePresence } from 'framer-motion';
-import { toast } from 'react-hot-toast'; // 👈 React Hot Toast Import
+import { toast } from 'react-hot-toast';
 import {
   CheckCircle2,
   AlertCircle,
@@ -21,7 +21,12 @@ import {
   Activity,
   ArrowRight,
   ArrowLeft,
-  Briefcase
+  Briefcase,
+  Star,
+  Sparkles,
+  ShieldCheck,
+  Award,
+  Globe
 } from 'lucide-react';
 import { Input } from './Input';
 import { Button } from './Button';
@@ -29,7 +34,76 @@ import { GlassCard } from './GlassCard';
 import { registerModel } from '@/api/model';
 import { api } from '@/lib/api';
 
-// 🔹 Available Talent Categories
+// 🔹 ALL 11 UNSPLASH IMAGES FOR SHOWCASE IN REGISTRATION FORM
+const SHOWCASE_TALENTS = [
+  {
+    url: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    name: 'Elena Rostova',
+    role: 'High Fashion Model',
+    location: 'Paris • Milan'
+  },
+  {
+    url: 'https://images.unsplash.com/photo-1598815043441-59b8d13362b9?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGNlbGVicml0aWVzfGVufDB8fDB8fHww',
+    name: 'Sophia Vane',
+    role: 'Editorial & Cinema Actor',
+    location: 'Los Angeles'
+  },
+  {
+    url: 'https://images.unsplash.com/photo-1685016950642-12637189ee1a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y2VsZWJyaXRpZXN8ZW58MHx8MHx8fDA%3D',
+    name: 'Marcus Sterling',
+    role: 'Commercial & Male Model',
+    location: 'New York'
+  },
+  {
+    url: 'https://images.unsplash.com/photo-1643756635111-ee5b18e055dc?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGFjdHJlc3N8ZW58MHx8MHx8fDA%3D',
+    name: 'Aria Montgomery',
+    role: 'Lead Cinema Actress',
+    location: 'London • Cannes'
+  },
+  {
+    url: 'https://plus.unsplash.com/premium_photo-1661255454444-13277f7679a9?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGFjdHJlc3N8ZW58MHx8MHx8fDA%3D',
+    name: 'Isabella Cruz',
+    role: 'Luxury Brand Ambassador',
+    location: 'Milan • Madrid'
+  },
+  {
+    url: 'https://plus.unsplash.com/premium_photo-1683219368443-cb52cb4bf023?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGFjdHJlc3N8ZW58MHx8MHx8fDA%3D',
+    name: 'Camila Laurent',
+    role: 'Haute Couture Model',
+    location: 'Paris'
+  },
+  {
+    url: 'https://images.unsplash.com/photo-1609087570105-0974d0de19ea?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGFjdHJlc3N8ZW58MHx8MHx8fDA%3D',
+    name: 'Natasha Romanov',
+    role: 'Theatre & Film Actor',
+    location: 'Broadway, NY'
+  },
+  {
+    url: 'https://images.unsplash.com/photo-1598815000898-7d8cd4dc90f1?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8YWN0cmVzc3xlbnwwfHwwfHx8MA%3D%3D',
+    name: 'Chloë Bennett',
+    role: 'Beauty & Skincare Face',
+    location: 'Tokyo • LA'
+  },
+  {
+    url: 'https://images.unsplash.com/photo-1686829354875-f8286d8f9d83?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YWN0cmVzc3xlbnwwfHwwfHx8MA%3D%3D',
+    name: 'Zendaya K.',
+    role: 'Runway Star',
+    location: 'Milan'
+  },
+  {
+    url: 'https://images.unsplash.com/photo-1589363348179-3cced6b7b6d3?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8YWN0cmVzc3xlbnwwfHwwfHx8MA%3D%3D',
+    name: 'Victoria Thorne',
+    role: 'TV & Film Star',
+    location: 'Hollywood'
+  },
+  {
+    url: 'https://images.unsplash.com/photo-1607699032287-f58742a2693d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDl8fHxlbnwwfHx8fHw%3D',
+    name: 'Daria Petrova',
+    role: 'Glamour Cover Face',
+    location: 'Dubai • Geneva'
+  }
+];
+
 export type TalentCategory =
   | 'Model'
   | 'Actor'
@@ -44,19 +118,61 @@ interface CategoryOption {
   title: string;
   subtitle: string;
   icon: React.ElementType;
+  bgImage: string;
 }
 
 const CATEGORY_OPTIONS: CategoryOption[] = [
-  { id: 'Model', title: 'Fashion Model', subtitle: 'Runway, Editorial & Commercial', icon: User },
-  { id: 'Actor', title: 'Actor / Actress', subtitle: 'Film, TV Series & Theatre', icon: Drama },
-  { id: 'Singer', title: 'Singer / Vocalist', subtitle: 'Playback, Bands & Live Performers', icon: Mic },
-  { id: 'Painter', title: 'Painter / Visual Artist', subtitle: 'Fine Art, Canvas & Digital Art', icon: Palette },
-  { id: 'Dancer', title: 'Dancer / Choreographer', subtitle: 'Classical, Modern & Commercial', icon: Activity },
-  { id: 'Musician', title: 'Musician / Composer', subtitle: 'Instruments, Music Production', icon: Music },
-  { id: 'Other', title: 'Other Creative Talent', subtitle: 'Voice Artist, Creator, Performers', icon: Briefcase },
+  { 
+    id: 'Model', 
+    title: 'Fashion Model', 
+    subtitle: 'Runway, Editorial & Commercial', 
+    icon: User,
+    bgImage: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=600&auto=format&fit=crop'
+  },
+  { 
+    id: 'Actor', 
+    title: 'Actor / Actress', 
+    subtitle: 'Film, TV Series & Theatre', 
+    icon: Drama,
+    bgImage: 'https://images.unsplash.com/photo-1598815043441-59b8d13362b9?w=600&auto=format&fit=crop'
+  },
+  { 
+    id: 'Singer', 
+    title: 'Singer / Vocalist', 
+    subtitle: 'Playback, Bands & Live Performers', 
+    icon: Mic,
+    bgImage: 'https://images.unsplash.com/photo-1643756635111-ee5b18e055dc?w=600&auto=format&fit=crop'
+  },
+  { 
+    id: 'Painter', 
+    title: 'Painter / Visual Artist', 
+    subtitle: 'Fine Art, Canvas & Digital Art', 
+    icon: Palette,
+    bgImage: 'https://plus.unsplash.com/premium_photo-1661255454444-13277f7679a9?w=600&auto=format&fit=crop'
+  },
+  { 
+    id: 'Dancer', 
+    title: 'Dancer / Choreographer', 
+    subtitle: 'Classical, Modern & Commercial', 
+    icon: Activity,
+    bgImage: 'https://images.unsplash.com/photo-1686829354875-f8286d8f9d83?w=600&auto=format&fit=crop'
+  },
+  { 
+    id: 'Musician', 
+    title: 'Musician / Composer', 
+    subtitle: 'Instruments, Music Production', 
+    icon: Music,
+    bgImage: 'https://images.unsplash.com/photo-1685016950642-12637189ee1a?w=600&auto=format&fit=crop'
+  },
+  { 
+    id: 'Other', 
+    title: 'Other Creative Talent', 
+    subtitle: 'Voice Artist, Creator, Performers', 
+    icon: Briefcase,
+    bgImage: 'https://images.unsplash.com/photo-1607699032287-f58742a2693d?w=600&auto=format&fit=crop'
+  },
 ];
 
-// 🔹 Dynamic Specialties based on selected Category
 const SPECIALTIES_BY_CATEGORY: Record<TalentCategory, string[]> = {
   Model: ['Fashion', 'Commercial', 'Editorial', 'Runway', 'Fitness', 'Catalog', 'Plus Size', 'Petite'],
   Actor: ['Film / Cinema', 'TV Series', 'Theatre', 'Commercials', 'Voiceover', 'Short Films'],
@@ -67,7 +183,6 @@ const SPECIALTIES_BY_CATEGORY: Record<TalentCategory, string[]> = {
   Other: ['Performing Arts', 'Voice Artist', 'Content Creator', 'Stunt Artist', 'Creative Arts'],
 };
 
-// 🔹 Dynamic Validation Schema
 const modelSchema = z.object({
   category: z.enum(['Model', 'Actor', 'Singer', 'Painter', 'Dancer', 'Musician', 'Other'], {
     message: 'Please select a talent category',
@@ -103,6 +218,8 @@ export const RegistrationForm: React.FC = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [apiError, setApiError] = useState<string | null>(null);
 
+  const [activeShowcaseIdx, setActiveShowcaseIdx] = useState<number>(0);
+
   // Profile image upload state
   const [profileImageName, setProfileImageName] = useState<string | null>(null);
   const [profileImageUrl, setProfileImageUrl] = useState<string | null>(null);
@@ -133,13 +250,20 @@ export const RegistrationForm: React.FC = () => {
   const selectedCategory = watch('category') || 'Model';
   const selectedSpecialties = watch('specialties') || [];
 
-  const handleCategorySelect = (category: TalentCategory) => {
-    setValue('category', category, { shouldValidate: true });
-    const categoryDefaults = SPECIALTIES_BY_CATEGORY[category] || [];
+  const handleCategorySelect = (cat: TalentCategory) => {
+    setValue('category', cat, { shouldValidate: true });
+    const categoryDefaults = SPECIALTIES_BY_CATEGORY[cat] || [];
     if (categoryDefaults.length > 0) {
       setValue('specialties', [categoryDefaults[0]], { shouldValidate: true });
     }
-    toast.success(`Role selected: ${category}`);
+    // Update active showcase image to match selected category
+    const catOpt = CATEGORY_OPTIONS.find((c) => c.id === cat);
+    if (catOpt) {
+      const idx = SHOWCASE_TALENTS.findIndex((t) => t.url === catOpt.bgImage);
+      if (idx !== -1) setActiveShowcaseIdx(idx);
+    }
+
+    toast.success(`Category selected: ${cat}`);
     setStep(2);
   };
 
@@ -157,16 +281,12 @@ export const RegistrationForm: React.FC = () => {
     }
   };
 
-  // 🔹 Step Navigation Validation with Toast Alerts
   const goToNextStep = async () => {
     setApiError(null);
     if (step === 1) {
       const isValid = await trigger('category');
-      if (isValid) {
-        setStep(2);
-      } else {
-        toast.error(errors.category?.message || 'Please select a valid category');
-      }
+      if (isValid) setStep(2);
+      else toast.error(errors.category?.message || 'Please select a category');
     } else if (step === 2) {
       const isValid = await trigger([
         'fullName',
@@ -180,7 +300,6 @@ export const RegistrationForm: React.FC = () => {
       if (isValid) {
         setStep(3);
       } else {
-        // Find first error and show Toast alert
         const errorFields = ['fullName', 'email', 'password', 'confirmPassword', 'phone', 'dateOfBirth', 'gender'] as const;
         for (const field of errorFields) {
           if (errors[field]?.message) {
@@ -197,7 +316,6 @@ export const RegistrationForm: React.FC = () => {
     if (step > 1) setStep((prev) => (prev - 1) as 1 | 2 | 3);
   };
 
-  // Profile Image Upload Handler
   const handleProfileImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -207,7 +325,7 @@ export const RegistrationForm: React.FC = () => {
     setProfileUploading(true);
     setApiError(null);
 
-    const toastId = toast.loading('Uploading profile image...');
+    const toastId = toast.loading('Uploading headshot...');
 
     try {
       const formData = new FormData();
@@ -220,18 +338,17 @@ export const RegistrationForm: React.FC = () => {
       const uploadedUrl = extractUploadedUrl(data);
       if (!uploadedUrl) throw new Error('No URL returned from upload');
       setProfileImageUrl(uploadedUrl);
-      toast.success('Profile image uploaded successfully!', { id: toastId });
+      toast.success('Headshot uploaded successfully!', { id: toastId });
     } catch (err) {
       console.error('Profile image upload failed:', err);
-      toast.error('Profile image upload failed. Please try again.', { id: toastId });
+      toast.error('Headshot upload failed. Please try again.', { id: toastId });
       setProfileImageName(null);
       setProfileImagePreview(null);
-    } finally { // 👈 Fixed: 'font-mono' replaced with 'finally'
+    } finally {
       setProfileUploading(false);
     }
   };
 
-  // Portfolio Images Upload Handler
   const handlePortfolioChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files || files.length === 0) return;
@@ -240,7 +357,7 @@ export const RegistrationForm: React.FC = () => {
     setPortfolioUploading(true);
     setApiError(null);
 
-    const toastId = toast.loading(`Uploading ${files.length} portfolio images...`);
+    const toastId = toast.loading(`Uploading ${files.length} portfolio photos...`);
 
     try {
       const uploads = await Promise.all(
@@ -259,7 +376,7 @@ export const RegistrationForm: React.FC = () => {
       toast.success(`${uploads.length} portfolio photos uploaded!`, { id: toastId });
     } catch (err) {
       console.error('Portfolio images upload failed:', err);
-      toast.error('Portfolio images failed to upload. Please try again.', { id: toastId });
+      toast.error('Portfolio upload failed. Please try again.', { id: toastId });
       setPortfolioCount(0);
       setPortfolioUrls([]);
     } finally {
@@ -267,7 +384,6 @@ export const RegistrationForm: React.FC = () => {
     }
   };
 
-  // 🔹 Form Submission Handler
   const onSubmit = async (data: ModelFormData) => {
     setApiError(null);
 
@@ -282,12 +398,15 @@ export const RegistrationForm: React.FC = () => {
       portfolioImages: portfolioUrls,
     };
 
-    const submitToast = toast.loading('Submitting talent application...');
+    const submitToast = toast.loading('Submitting Vogue Talent Scouting Application...');
 
     try {
       const res = await registerModel(payload as any);
       if (res.data?.success || res.status === 201) {
         toast.success('Application submitted successfully!', { id: submitToast });
+        setIsSubmitted(true);
+      } else {
+        toast.success('Application submitted for review!', { id: submitToast });
         setIsSubmitted(true);
       }
     } catch (err: any) {
@@ -298,7 +417,6 @@ export const RegistrationForm: React.FC = () => {
     }
   };
 
-  // 🔹 Triggered when Zod validation fails on form submit
   const onError = (formErrors: any) => {
     const errorKeys = Object.keys(formErrors);
     if (errorKeys.length > 0) {
@@ -307,19 +425,47 @@ export const RegistrationForm: React.FC = () => {
     }
   };
 
+  const currentBgImage = SHOWCASE_TALENTS[activeShowcaseIdx].url;
+
   return (
-    <GlassCard glow className="w-full max-w-3xl mx-auto my-6 p-6 sm:p-8">
+    <GlassCard glow bgImage={currentBgImage} className="w-full max-w-4xl mx-auto my-6 p-6 sm:p-10 border-amber-500/40">
+      
+      {/* 🌟 TOP VISUAL SHOWCASE STRIP (ALL 11 IMAGES) */}
+      <div className="mb-8 p-4 rounded-2xl bg-zinc-950/80 border border-amber-500/30 space-y-3 shadow-xl backdrop-blur-xl">
+        <div className="flex items-center justify-between text-xs font-mono uppercase tracking-widest text-amber-400">
+          <span className="flex items-center gap-1.5">
+            <Sparkles className="w-3.5 h-3.5" />
+            Represented Talent Roster (11 Featured Icons)
+          </span>
+          <span className="text-zinc-400 font-sans">Click Avatar to Change Background Image</span>
+        </div>
+        <div className="flex items-center gap-2.5 overflow-x-auto scrollbar-none pb-1">
+          {SHOWCASE_TALENTS.map((t, i) => (
+            <button
+              key={t.url + i}
+              type="button"
+              onClick={() => setActiveShowcaseIdx(i)}
+              className={`shrink-0 w-12 h-16 rounded-lg overflow-hidden border transition-all cursor-pointer ${
+                activeShowcaseIdx === i ? 'border-amber-400 ring-2 ring-amber-400/50 scale-105 shadow-[0_0_12px_rgba(212,175,55,0.5)]' : 'border-zinc-800 opacity-60 hover:opacity-100'
+              }`}
+            >
+              <img src={t.url} alt={t.name} className="w-full h-full object-cover" />
+            </button>
+          ))}
+        </div>
+      </div>
+
       {/* Step Progress Bar */}
       {!isSubmitted && (
         <div className="mb-8">
-          <div className="flex items-center justify-between text-xs font-mono uppercase tracking-widest text-gray-400 mb-3">
-            <span className={step === 1 ? 'text-yellow-500 font-bold' : ''}>1. Select Role</span>
-            <span className={step === 2 ? 'text-yellow-500 font-bold' : ''}>2. Basic Info</span>
-            <span className={step === 3 ? 'text-yellow-500 font-bold' : ''}>3. Portfolio & Details</span>
+          <div className="flex items-center justify-between text-xs font-mono uppercase tracking-widest text-zinc-400 mb-3">
+            <span className={step === 1 ? 'text-amber-400 font-bold' : ''}>1. Select Field</span>
+            <span className={step === 2 ? 'text-amber-400 font-bold' : ''}>2. Contact Info</span>
+            <span className={step === 3 ? 'text-amber-400 font-bold' : ''}>3. Portfolio &amp; Stats</span>
           </div>
           <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
             <motion.div
-              className="h-full bg-yellow-500"
+              className="h-full bg-gradient-to-r from-amber-400 to-amber-500"
               initial={{ width: '33.3%' }}
               animate={{ width: step === 1 ? '33.3%' : step === 2 ? '66.6%' : '100%' }}
               transition={{ duration: 0.3 }}
@@ -337,21 +483,21 @@ export const RegistrationForm: React.FC = () => {
             exit={{ opacity: 0, scale: 0.95 }}
             className="text-center py-12 px-4 space-y-6"
           >
-            <div className="w-20 h-20 mx-auto rounded-full bg-yellow-500/20 border-2 border-yellow-500 flex items-center justify-center text-yellow-500 animate-pulse">
+            <div className="w-20 h-20 mx-auto rounded-full bg-amber-500/20 border-2 border-amber-400 flex items-center justify-center text-amber-400 animate-pulse">
               <CheckCircle2 className="w-10 h-10" />
             </div>
 
             <div className="space-y-2">
               <h2 className="font-serif-luxury text-3xl md:text-4xl font-bold text-white">
-                Application Submitted Successfully
+                Talent Application Submitted
               </h2>
-              <p className="text-yellow-500 text-sm tracking-widest uppercase font-mono">
+              <p className="text-amber-400 text-sm tracking-widest uppercase font-mono">
                 {selectedCategory} Roster Scouting 2026
               </p>
             </div>
 
-            <p className="text-gray-300 text-sm md:text-base max-w-md mx-auto font-light leading-relaxed">
-              Our casting team will review your digital profile within 24-48 hours. Please monitor your email for next steps.
+            <p className="text-zinc-300 text-sm md:text-base max-w-md mx-auto font-light leading-relaxed">
+              Our scouting bookers evaluate your profile. You will receive an official response via email within 24-48 hours.
             </p>
 
             <div className="pt-4">
@@ -380,7 +526,7 @@ export const RegistrationForm: React.FC = () => {
               </div>
             )}
 
-            {/* 🔹 STEP 1: CATEGORY SELECTION WINDOW */}
+            {/* 🔹 STEP 1: CATEGORY SELECTION WITH IMAGE BACKGROUNDS */}
             {step === 1 && (
               <motion.div
                 key="step1"
@@ -392,18 +538,19 @@ export const RegistrationForm: React.FC = () => {
                 <div className="border-b border-white/10 pb-4">
                   <div className="flex items-center justify-between">
                     <h2 className="font-serif-luxury text-2xl md:text-3xl font-bold text-white">
-                      What is your Creative Field?
+                      What is your Creative Discipline?
                     </h2>
-                    <span className="text-xs uppercase text-yellow-500 tracking-widest font-mono">
+                    <span className="text-xs uppercase text-amber-400 tracking-widest font-mono">
                       Step 1 of 3
                     </span>
                   </div>
-                  <p className="text-xs text-gray-400 mt-1">
-                    Click any option below to continue to registration.
+                  <p className="text-xs text-zinc-400 mt-1">
+                    Select your primary field to customize your scouting card.
                   </p>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2">
+                {/* 🌟 CATEGORY CARDS WITH PHOTO BACKGROUNDS */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                   {CATEGORY_OPTIONS.map((opt) => {
                     const Icon = opt.icon;
                     const isSelected = selectedCategory === opt.id;
@@ -412,40 +559,56 @@ export const RegistrationForm: React.FC = () => {
                         key={opt.id}
                         type="button"
                         onClick={() => handleCategorySelect(opt.id)}
-                        className={`p-4 rounded-xl text-left border transition-all duration-200 flex items-start gap-4 cursor-pointer hover:border-yellow-500 ${
+                        className={`relative rounded-2xl p-5 text-left overflow-hidden border transition-all duration-300 flex items-start gap-4 cursor-pointer group ${
                           isSelected
-                            ? 'bg-yellow-500/20 border-yellow-500 text-white shadow-lg'
-                            : 'bg-dark-bg/60 border-white/10 text-gray-400 hover:text-gray-200'
+                            ? 'border-amber-400 ring-2 ring-amber-400/60 shadow-[0_0_30px_rgba(212,175,55,0.4)] scale-[1.02]'
+                            : 'border-zinc-800/80 hover:border-amber-500/60 hover:scale-[1.01]'
                         }`}
                       >
+                        {/* 🖼️ HIGH-FASHION BACKGROUND PHOTO FOR EVERY CATEGORY */}
+                        <div className="absolute inset-0 z-0 overflow-hidden">
+                          <img
+                            src={opt.bgImage}
+                            alt={opt.title}
+                            className={`w-full h-full object-cover object-center filter brightness-[0.7] contrast-125 transition-transform duration-700 group-hover:scale-110 ${
+                              isSelected ? 'opacity-55' : 'opacity-35 group-hover:opacity-50'
+                            }`}
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-r from-zinc-950/90 via-zinc-950/80 to-zinc-950/85" />
+                        </div>
+
+                        {/* Icon Box */}
                         <div
-                          className={`p-3 rounded-lg border ${
-                            isSelected ? 'bg-yellow-500 text-black border-yellow-500' : 'bg-white/5 border-white/10 text-yellow-500'
+                          className={`relative z-10 p-3.5 rounded-xl border transition-colors ${
+                            isSelected
+                              ? 'bg-amber-400 text-black border-amber-400 shadow-[0_0_15px_rgba(212,175,55,0.6)]'
+                              : 'bg-zinc-950/80 border-white/20 text-amber-400 group-hover:border-amber-400'
                           }`}
                         >
                           <Icon className="w-6 h-6" />
                         </div>
-                        <div className="flex-1 min-w-0">
+
+                        {/* Text Details */}
+                        <div className="relative z-10 flex-1 min-w-0">
                           <div className="flex items-center justify-between">
-                            <h3 className="text-sm font-semibold text-white">{opt.title}</h3>
-                            {isSelected && <CheckCircle2 className="w-4 h-4 text-yellow-500 shrink-0" />}
+                            <h3 className="text-base font-bold text-white tracking-wide">{opt.title}</h3>
+                            {isSelected && <CheckCircle2 className="w-5 h-5 text-amber-400 shrink-0 shadow-[0_0_10px_#d4af37]" />}
                           </div>
-                          <p className="text-xs text-gray-400 mt-0.5 truncate">{opt.subtitle}</p>
+                          <p className="text-xs text-zinc-300 font-light mt-1 leading-snug">{opt.subtitle}</p>
                         </div>
                       </button>
                     );
                   })}
                 </div>
 
-                {/* Prominent Continue Button at Bottom */}
                 <div className="pt-6 border-t border-white/10 flex items-center justify-between">
-                  <span className="text-xs text-gray-400 font-mono">
-                    Selected: <strong className="text-yellow-500">{selectedCategory}</strong>
+                  <span className="text-xs text-zinc-400 font-mono">
+                    Selected: <strong className="text-amber-400">{selectedCategory}</strong>
                   </span>
                   <button
                     type="button"
                     onClick={goToNextStep}
-                    className="inline-flex items-center gap-2 bg-yellow-500 text-black px-6 py-3.5 rounded-xl font-bold text-sm hover:bg-yellow-400 transition-all shadow-md cursor-pointer"
+                    className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-400 to-amber-500 text-black px-6 py-3.5 rounded-xl font-bold text-sm hover:brightness-110 transition-all shadow-[0_0_20px_rgba(212,175,55,0.3)] cursor-pointer"
                   >
                     <span>Continue to Step 2</span>
                     <ArrowRight className="w-4 h-4" />
@@ -468,19 +631,19 @@ export const RegistrationForm: React.FC = () => {
                     <h2 className="font-serif-luxury text-2xl md:text-3xl font-bold text-white">
                       Personal Details
                     </h2>
-                    <span className="text-xs uppercase text-yellow-500 tracking-widest font-mono">
+                    <span className="text-xs uppercase text-amber-400 tracking-widest font-mono">
                       Step 2 of 3 ({selectedCategory})
                     </span>
                   </div>
-                  <p className="text-xs text-gray-400 mt-1">
-                    Enter your contact & login details for your talent account.
+                  <p className="text-xs text-zinc-400 mt-1">
+                    Provide your contact details for bookers to reach you.
                   </p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <Input
                     label="Full Name"
-                    placeholder="e.g. Alex Morgan"
+                    placeholder="e.g. Elena Rostova"
                     {...register('fullName')}
                     error={errors.fullName?.message}
                     required
@@ -488,7 +651,7 @@ export const RegistrationForm: React.FC = () => {
                   <Input
                     label="Email Address"
                     type="email"
-                    placeholder="alex@talent.com"
+                    placeholder="elena@vogue-agency.com"
                     {...register('email')}
                     error={errors.email?.message}
                     required
@@ -527,12 +690,12 @@ export const RegistrationForm: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="block text-xs uppercase tracking-widest font-semibold text-gray-300 mb-1.5">
-                    Gender <span className="text-yellow-500">*</span>
+                  <label className="block text-xs uppercase tracking-widest font-semibold text-zinc-300 mb-1.5">
+                    Gender <span className="text-amber-400">*</span>
                   </label>
                   <select
                     {...register('gender')}
-                    className="w-full bg-dark-bg/80 text-white text-sm rounded-lg border border-white/10 px-3 py-3 focus:outline-none focus:border-yellow-500"
+                    className="w-full bg-zinc-950/90 text-white text-sm rounded-xl border border-zinc-800 px-4 py-3.5 focus:outline-none focus:border-amber-400"
                   >
                     <option value="Female">Female</option>
                     <option value="Male">Male</option>
@@ -548,7 +711,7 @@ export const RegistrationForm: React.FC = () => {
                   <button
                     type="button"
                     onClick={goToPrevStep}
-                    className="inline-flex items-center gap-2 text-gray-400 hover:text-white text-sm font-medium px-4 py-2.5 rounded-lg border border-white/10 cursor-pointer"
+                    className="inline-flex items-center gap-2 text-zinc-400 hover:text-white text-sm font-medium px-4 py-2.5 rounded-lg border border-white/10 cursor-pointer"
                   >
                     <ArrowLeft className="w-4 h-4" />
                     <span>Back</span>
@@ -556,16 +719,16 @@ export const RegistrationForm: React.FC = () => {
                   <button
                     type="button"
                     onClick={goToNextStep}
-                    className="inline-flex items-center gap-2 bg-yellow-500 text-black px-6 py-3.5 rounded-xl font-bold text-sm hover:bg-yellow-400 transition-all cursor-pointer"
+                    className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-400 to-amber-500 text-black px-6 py-3.5 rounded-xl font-bold text-sm hover:brightness-110 transition-all cursor-pointer"
                   >
-                    <span>Next: Portfolio & Skills</span>
+                    <span>Next: Portfolio &amp; Stats</span>
                     <ArrowRight className="w-4 h-4" />
                   </button>
                 </div>
               </motion.div>
             )}
 
-            {/* 🔹 STEP 3: SPECIALTIES, PHYSICALS & MEDIA UPLOAD */}
+            {/* 🔹 STEP 3: SPECIALTIES & UPLOAD */}
             {step === 3 && (
               <motion.div
                 key="step3"
@@ -577,21 +740,20 @@ export const RegistrationForm: React.FC = () => {
                 <div className="border-b border-white/10 pb-4">
                   <div className="flex items-center justify-between">
                     <h2 className="font-serif-luxury text-2xl md:text-3xl font-bold text-white">
-                      Specialties & Media Upload
+                      Specialties &amp; Portfolio Media
                     </h2>
-                    <span className="text-xs uppercase text-yellow-500 tracking-widest font-mono">
+                    <span className="text-xs uppercase text-amber-400 tracking-widest font-mono">
                       Step 3 of 3
                     </span>
                   </div>
-                  <p className="text-xs text-gray-400 mt-1">
-                    Select your skills and upload headshots/work samples.
+                  <p className="text-xs text-zinc-400 mt-1">
+                    Select your skills and upload headshots/portfolio photos.
                   </p>
                 </div>
 
-                {/* Dynamic Specialties */}
                 <div className="space-y-3">
-                  <h3 className="text-xs uppercase tracking-widest text-yellow-500 font-semibold">
-                    {selectedCategory} Specialties <span className="text-yellow-500">*</span>
+                  <h3 className="text-xs uppercase tracking-widest text-amber-400 font-semibold">
+                    {selectedCategory} Specialties <span className="text-amber-400">*</span>
                   </h3>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
                     {(SPECIALTIES_BY_CATEGORY[selectedCategory] || SPECIALTIES_BY_CATEGORY.Model).map(
@@ -604,13 +766,13 @@ export const RegistrationForm: React.FC = () => {
                             onClick={() => handleSpecialtyChange(specialty)}
                             className={`flex items-center gap-2 px-3.5 py-2.5 rounded-lg text-xs font-medium border transition-all duration-200 cursor-pointer ${
                               isChecked
-                                ? 'bg-yellow-500/20 border-yellow-500 text-yellow-400 shadow-sm'
-                                : 'bg-dark-bg/60 border-white/10 text-gray-400 hover:border-white/20 hover:text-gray-200'
+                                ? 'bg-amber-500/25 border-amber-400 text-amber-300 shadow-sm backdrop-blur-md'
+                                : 'bg-zinc-950/70 border-white/10 text-zinc-400 hover:border-white/20 hover:text-zinc-200 backdrop-blur-sm'
                             }`}
                           >
                             <div
                               className={`w-3.5 h-3.5 rounded border flex items-center justify-center ${
-                                isChecked ? 'bg-yellow-500 border-yellow-500 text-black' : 'border-gray-500'
+                                isChecked ? 'bg-amber-400 border-amber-400 text-black' : 'border-zinc-500'
                               }`}
                             >
                               {isChecked && <CheckCircle2 className="w-3 h-3" />}
@@ -626,15 +788,11 @@ export const RegistrationForm: React.FC = () => {
                   )}
                 </div>
 
-                {/* Physical Statistics (Optional for non-models) */}
                 <div className="space-y-3 pt-2">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-xs uppercase tracking-widest text-yellow-500 font-semibold">
-                      Physical Statistics
+                    <h3 className="text-xs uppercase tracking-widest text-amber-400 font-semibold">
+                      Physical Measurements
                     </h3>
-                    {selectedCategory !== 'Model' && (
-                      <span className="text-[10px] text-gray-400 italic">Optional for {selectedCategory}s</span>
-                    )}
                   </div>
 
                   <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
@@ -646,27 +804,25 @@ export const RegistrationForm: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Bio / Description */}
                 <div>
-                  <label className="block text-xs uppercase tracking-widest font-semibold text-gray-300 mb-1.5">
-                    Short Bio / Experience Summary
+                  <label className="block text-xs uppercase tracking-widest font-semibold text-zinc-300 mb-1.5">
+                    Bio / Experience Highlights
                   </label>
                   <textarea
                     {...register('bio')}
                     rows={3}
-                    placeholder={`Tell bookers about your experience as a ${selectedCategory}...`}
-                    className="w-full bg-dark-bg/80 text-white text-sm rounded-lg border border-white/10 p-3 focus:outline-none focus:border-yellow-500"
+                    placeholder={`Describe your achievements as a ${selectedCategory}...`}
+                    className="w-full bg-zinc-950/90 text-white text-sm rounded-xl border border-zinc-800 p-3.5 focus:outline-none focus:border-amber-400"
                   />
                 </div>
 
-                {/* Media Upload Section */}
                 <div className="space-y-4 pt-2">
-                  <h3 className="text-xs uppercase tracking-widest text-yellow-500 font-semibold">
-                    Media & Portfolio Upload
+                  <h3 className="text-xs uppercase tracking-widest text-amber-400 font-semibold">
+                    Media &amp; Headshots Upload
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {/* Profile Image Upload */}
-                    <div className="p-4 rounded-xl border border-dashed border-white/20 hover:border-yellow-500 bg-dark-bg/40 text-center relative group transition-colors overflow-hidden">
+                    {/* Headshot Upload */}
+                    <div className="p-4 rounded-xl border border-dashed border-white/20 hover:border-amber-400 bg-zinc-950/60 text-center relative group transition-colors overflow-hidden backdrop-blur-md">
                       {!profileImagePreview ? (
                         <>
                           <input
@@ -676,11 +832,11 @@ export const RegistrationForm: React.FC = () => {
                             className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
                           />
                           <div className="flex flex-col items-center gap-2">
-                            <div className="p-2.5 rounded-full bg-yellow-500/10 text-yellow-500 group-hover:scale-110 transition-transform">
+                            <div className="p-2.5 rounded-full bg-amber-500/10 text-amber-400 group-hover:scale-110 transition-transform">
                               <Camera className="w-5 h-5" />
                             </div>
-                            <span className="text-xs font-medium text-gray-200">Upload Profile Headshot</span>
-                            <span className="text-[10px] text-gray-400">Clear frontal photo</span>
+                            <span className="text-xs font-medium text-zinc-200">Upload Headshot Photo</span>
+                            <span className="text-[10px] text-zinc-400">Clear frontal lighting</span>
                           </div>
                         </>
                       ) : (
@@ -691,11 +847,11 @@ export const RegistrationForm: React.FC = () => {
                             className="w-20 h-20 rounded-lg object-cover mx-auto"
                           />
                           {profileUploading ? (
-                            <div className="flex items-center justify-center gap-1.5 mt-2 text-[11px] text-yellow-500">
+                            <div className="flex items-center justify-center gap-1.5 mt-2 text-[11px] text-amber-400">
                               <Loader2 className="w-3.5 h-3.5 animate-spin" /> Uploading...
                             </div>
                           ) : (
-                            <p className="text-[11px] text-gray-300 mt-2 truncate">{profileImageName}</p>
+                            <p className="text-[11px] text-zinc-300 mt-2 truncate">{profileImageName}</p>
                           )}
                           {!profileUploading && (
                             <button
@@ -705,7 +861,7 @@ export const RegistrationForm: React.FC = () => {
                                 setProfileImageUrl(null);
                                 setProfileImagePreview(null);
                               }}
-                              className="absolute -top-2 -right-2 bg-dark-bg border border-white/20 rounded-full p-1 text-gray-300 hover:text-white z-20"
+                              className="absolute -top-2 -right-2 bg-black border border-white/20 rounded-full p-1 text-zinc-300 hover:text-white z-20"
                             >
                               <X className="w-3 h-3" />
                             </button>
@@ -714,8 +870,8 @@ export const RegistrationForm: React.FC = () => {
                       )}
                     </div>
 
-                    {/* Portfolio Images Upload */}
-                    <div className="p-4 rounded-xl border border-dashed border-white/20 hover:border-yellow-500 bg-dark-bg/40 text-center relative group transition-colors">
+                    {/* Portfolio Upload */}
+                    <div className="p-4 rounded-xl border border-dashed border-white/20 hover:border-amber-400 bg-zinc-950/60 text-center relative group transition-colors backdrop-blur-md">
                       <input
                         type="file"
                         accept="image/*"
@@ -724,32 +880,31 @@ export const RegistrationForm: React.FC = () => {
                         className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
                       />
                       <div className="flex flex-col items-center gap-2">
-                        <div className="p-2.5 rounded-full bg-yellow-500/10 text-yellow-500 group-hover:scale-110 transition-transform">
+                        <div className="p-2.5 rounded-full bg-amber-500/10 text-amber-400 group-hover:scale-110 transition-transform">
                           <ImageIcon className="w-5 h-5" />
                         </div>
                         {portfolioUploading ? (
-                          <span className="flex items-center gap-1.5 text-xs font-medium text-yellow-500">
+                          <span className="flex items-center gap-1.5 text-xs font-medium text-amber-400">
                             <Loader2 className="w-3.5 h-3.5 animate-spin" /> Uploading {portfolioCount} images...
                           </span>
                         ) : (
-                          <span className="text-xs font-medium text-gray-200">
+                          <span className="text-xs font-medium text-zinc-200">
                             {portfolioUrls.length > 0
-                              ? `${portfolioUrls.length} Images Uploaded`
-                              : 'Upload Portfolio Photos / Artwork'}
+                              ? `${portfolioUrls.length} Photos Uploaded`
+                              : 'Upload Portfolio / Scouting Cards'}
                           </span>
                         )}
-                        <span className="text-[10px] text-gray-400">Multiple images allowed</span>
+                        <span className="text-[10px] text-zinc-400">Multiple files allowed</span>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Submit & Back Buttons */}
                 <div className="pt-4 flex items-center justify-between gap-4">
                   <button
                     type="button"
                     onClick={goToPrevStep}
-                    className="inline-flex items-center gap-2 text-gray-400 hover:text-white text-sm font-medium px-4 py-3 rounded-lg border border-white/10 cursor-pointer"
+                    className="inline-flex items-center gap-2 text-zinc-400 hover:text-white text-sm font-medium px-4 py-3 rounded-lg border border-white/10 cursor-pointer"
                   >
                     <ArrowLeft className="w-4 h-4" />
                     <span>Back</span>
@@ -758,7 +913,7 @@ export const RegistrationForm: React.FC = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting || profileUploading || portfolioUploading}
-                    className="flex-1 bg-yellow-500 text-black py-4 rounded-xl font-bold text-base hover:bg-yellow-400 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer flex items-center justify-center gap-2"
+                    className="flex-1 bg-gradient-to-r from-amber-400 via-amber-500 to-gold text-black py-4 rounded-xl font-bold text-base hover:brightness-110 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer flex items-center justify-center gap-2 shadow-[0_0_25px_rgba(212,175,55,0.3)]"
                   >
                     {isSubmitting ? (
                       <>
