@@ -22,12 +22,14 @@ import {
   Plane,
   X,
   Play,
-  Palette,
-  Mic,
-  Drama,
-  Music,
-  Activity,
-  Briefcase
+  Calendar,
+  Globe,
+  Award,
+  CheckCircle2,
+  Phone,
+  Mail,
+  Share2,
+  Zap,
 } from "lucide-react";
 
 type PortfolioItem = {
@@ -52,6 +54,24 @@ const getYoutubeEmbedUrl = (url: string) => {
   } catch {
     return "";
   }
+};
+
+// Helper: Calculate exact age from date string
+const getAge = (dob?: string | Date) => {
+  if (!dob) return null;
+  const birth = new Date(dob);
+  if (isNaN(birth.getTime())) return null;
+  const diff = Date.now() - birth.getTime();
+  return Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
+};
+
+// Helper: Convert Height cm to feet & inches
+const formatHeight = (cm?: number) => {
+  if (!cm) return "N/A";
+  const realInches = cm / 2.54;
+  const feet = Math.floor(realInches / 12);
+  const inches = Math.round(realInches % 12);
+  return `${cm} cm (${feet}'${inches}")`;
 };
 
 // Dynamic Back Path based on candidate category
@@ -81,6 +101,8 @@ export default function PublicModelDetailPage() {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [likesCount, setLikesCount] = useState<number>(0);
+  const [isLiked, setIsLiked] = useState<boolean>(false);
 
   useEffect(() => {
     if (!slug) return;
@@ -98,6 +120,7 @@ export default function PublicModelDetailPage() {
         if (modelObj && (modelObj.name || modelObj._id)) {
           setModel(modelObj);
           setPortfolio(portfolioList);
+          setLikesCount(modelObj.likes || 0);
         } else {
           setError("Profile not found.");
         }
@@ -111,13 +134,23 @@ export default function PublicModelDetailPage() {
     fetchModelDetail();
   }, [slug]);
 
+  const handleLike = () => {
+    if (isLiked) {
+      setLikesCount((prev) => Math.max(0, prev - 1));
+      setIsLiked(false);
+    } else {
+      setLikesCount((prev) => prev + 1);
+      setIsLiked(true);
+    }
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-[#07090e] flex flex-col items-center justify-center text-slate-400 space-y-4 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(245,158,11,0.08),transparent_60%)]" />
         <div className="relative p-5 rounded-2xl bg-slate-900/60 border border-slate-800/80 backdrop-blur-xl flex flex-col items-center gap-3 shadow-2xl">
           <Sparkles className="w-8 h-8 text-amber-400 animate-spin" />
-          <p className="text-xs font-medium text-slate-300 tracking-wide">Loading portfolio...</p>
+          <p className="text-xs font-medium text-slate-300 tracking-wide">Loading full talent portfolio...</p>
         </div>
       </div>
     );
@@ -149,10 +182,13 @@ export default function PublicModelDetailPage() {
   const loc = model.preferredLocation || {};
   const categoryTag = model.category || "Model";
   const rosterInfo = getCategoryRosterPath(categoryTag);
+  const age = getAge(model.dateOfBirth);
+  const measurements = model.measurements || {};
+  const hasMeasurements = measurements.bust || measurements.waist || measurements.hips;
 
   return (
-    <div className="min-h-screen bg-[#07090e] text-slate-100 selection:bg-amber-500 selection:text-black pb-24 relative overflow-x-hidden">
-      {/* Ambient Lighting */}
+    <div className="min-h-screen bg-[#030508] text-slate-100 selection:bg-amber-500 selection:text-black pb-24 relative overflow-x-hidden">
+      {/* Background Ambient Studio Lighting */}
       <div className="pointer-events-none fixed inset-0 z-0">
         <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-gradient-to-b from-amber-500/10 via-amber-500/5 to-transparent blur-[120px] rounded-full" />
         <div className="absolute top-1/3 -left-40 w-[600px] h-[600px] bg-purple-600/5 blur-[140px] rounded-full" />
@@ -170,20 +206,20 @@ export default function PublicModelDetailPage() {
           className="w-full h-full object-cover filter brightness-90 saturate-[1.05]"
         />
 
-        <div className="absolute inset-0 bg-gradient-to-b from-[#07090e]/80 via-transparent to-transparent h-32" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#07090e] via-[#07090e]/75 via-40% to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#030508]/80 via-transparent to-transparent h-32" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#030508] via-[#030508]/75 via-40% to-transparent" />
 
         {/* Dynamic Back Button Container */}
         <div className="absolute top-6 left-6 right-6 flex items-center justify-between max-w-6xl mx-auto z-10">
           <Link
             href={rosterInfo.path}
-            className="group flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-950/70 hover:bg-slate-900/90 border border-slate-700/50 text-xs font-semibold text-slate-200 backdrop-blur-md transition-all duration-300 shadow-xl hover:border-amber-500/40"
+            className="group flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-950/80 hover:bg-slate-900 border border-slate-700/50 text-xs font-semibold text-slate-200 backdrop-blur-md transition-all duration-300 shadow-xl hover:border-amber-500/40"
           >
             <ChevronLeft className="w-4 h-4 text-amber-400 group-hover:-translate-x-0.5 transition-transform" />
             <span>Back to {rosterInfo.label}</span>
           </Link>
 
-          <span className="px-3.5 py-1 rounded-full text-xs font-bold bg-purple-900/80 text-purple-200 border border-purple-400/40 uppercase tracking-widest backdrop-blur-md shadow-lg">
+          <span className="px-3.5 py-1 rounded-full text-xs font-bold bg-amber-500/15 text-amber-300 border border-amber-500/30 uppercase tracking-widest backdrop-blur-md shadow-lg">
             {categoryTag}
           </span>
         </div>
@@ -193,11 +229,11 @@ export default function PublicModelDetailPage() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 -mt-24 sm:-mt-32 relative z-10 space-y-8">
         
         {/* Profile Header Card */}
-        <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/70 border border-slate-800/80 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.6)] flex flex-col md:flex-row items-center md:items-end justify-between gap-6 hover:border-slate-700/60 transition">
+        <div className="p-6 sm:p-8 rounded-3xl bg-slate-950/80 border border-amber-500/30 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.8)] flex flex-col md:flex-row items-center md:items-end justify-between gap-6 hover:border-amber-500/50 transition">
           <div className="flex flex-col sm:flex-row items-center gap-6 text-center sm:text-left">
             
             {/* Avatar Profile */}
-            <div className="relative w-32 h-32 sm:w-40 sm:h-40 rounded-3xl overflow-hidden border-2 border-amber-500/20 bg-slate-950 shadow-2xl shrink-0 ring-8 ring-slate-950/80 group">
+            <div className="relative w-32 h-32 sm:w-40 sm:h-40 rounded-3xl overflow-hidden border-2 border-amber-500/40 bg-slate-950 shadow-2xl shrink-0 ring-8 ring-slate-950/80 group">
               <img
                 src={
                   model.profileImage ||
@@ -210,113 +246,230 @@ export default function PublicModelDetailPage() {
               />
             </div>
 
-            {/* Title & Info */}
+            {/* Title & Primary Badges */}
             <div className="space-y-3">
               <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3">
                 <h1 className="text-2xl sm:text-4xl font-serif font-extrabold text-white tracking-wide">{model.name}</h1>
                 {model.isVerified && (
-                  <span className="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
-                    <ShieldCheck className="w-3.5 h-3.5" /> Verified Profile
+                  <span className="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 shadow-[0_0_12px_rgba(16,185,129,0.15)]">
+                    <ShieldCheck className="w-3.5 h-3.5" /> Verified Roster
                   </span>
                 )}
               </div>
 
-              {loc.city && (
-                <p className="text-xs sm:text-sm text-slate-400 flex items-center justify-center sm:justify-start gap-1.5 font-medium">
-                  <MapPin className="w-4 h-4 text-rose-400 shrink-0" />
-                  {loc.city}, {loc.state || loc.country || "India"}
-                </p>
-              )}
+              {/* Location & Age Badges */}
+              <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 text-xs text-slate-300">
+                {(loc.city || loc.state || loc.country) && (
+                  <p className="flex items-center gap-1.5 font-medium">
+                    <MapPin className="w-4 h-4 text-rose-400 shrink-0" />
+                    {[loc.city, loc.state, loc.country].filter(Boolean).join(", ")}
+                  </p>
+                )}
+                {age && (
+                  <p className="flex items-center gap-1 font-mono text-amber-300">
+                    <Calendar className="w-3.5 h-3.5 text-amber-400" /> {age} Years Old
+                  </p>
+                )}
+              </div>
 
               {/* Stat Badges */}
               <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 pt-1">
                 <span className="px-3.5 py-1.5 rounded-xl bg-amber-500/10 text-amber-300 border border-amber-500/30 text-xs font-semibold">
-                  {model.experience || "Talent"}
+                  {model.experience || "Intermediate"}
                 </span>
                 <span className="px-3.5 py-1.5 rounded-xl bg-purple-500/10 text-purple-300 border border-purple-500/30 text-xs font-semibold">
                   Category: {categoryTag}
                 </span>
                 {model.gender && (
-                  <span className="px-3.5 py-1.5 rounded-xl bg-slate-950/80 text-slate-300 border border-slate-800 text-xs font-semibold">
-                    {model.gender}
+                  <span className="px-3.5 py-1.5 rounded-xl bg-slate-900 text-slate-300 border border-slate-800 text-xs font-semibold">
+                    Gender: {model.gender}
+                  </span>
+                )}
+                {model.availability && (
+                  <span className="px-3.5 py-1.5 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-xs font-semibold uppercase">
+                    ● {model.availability}
                   </span>
                 )}
               </div>
             </div>
           </div>
 
-          {/* Engagement Stats */}
-          <div className="flex items-center gap-5 text-slate-400 text-xs font-medium bg-slate-950/50 px-4 py-2.5 rounded-2xl border border-slate-800/60 backdrop-blur-md">
+          {/* Engagement & Travel Bar */}
+          <div className="flex items-center gap-4 text-slate-300 text-xs font-medium bg-slate-900/80 px-4 py-3 rounded-2xl border border-slate-800 backdrop-blur-md">
             {typeof model.views === "number" && (
-              <span className="flex items-center gap-1.5 hover:text-slate-200 transition"><Eye className="w-4 h-4 text-slate-400" /> {model.views}</span>
+              <span className="flex items-center gap-1.5">
+                <Eye className="w-4 h-4 text-slate-400" /> {model.views} Views
+              </span>
             )}
-            {typeof model.likes === "number" && (
-              <span className="flex items-center gap-1.5 hover:text-rose-400 transition"><Heart className="w-4 h-4 text-rose-400/80" /> {model.likes}</span>
-            )}
+            <button
+              type="button"
+              onClick={handleLike}
+              className={`flex items-center gap-1.5 cursor-pointer transition-colors ${
+                isLiked ? "text-rose-400 font-bold" : "text-slate-300 hover:text-rose-400"
+              }`}
+            >
+              <Heart className={`w-4 h-4 ${isLiked ? "fill-rose-400 text-rose-400" : "text-rose-400/80"}`} />
+              <span>{likesCount}</span>
+            </button>
             {model.willingToTravel && (
-              <span className="flex items-center gap-1.5 text-emerald-400 font-semibold"><Plane className="w-4 h-4 animate-pulse" /> Willing to Travel</span>
+              <span className="flex items-center gap-1.5 text-emerald-400 font-semibold border-l border-slate-800 pl-3">
+                <Plane className="w-4 h-4 animate-pulse" /> Willing to Travel
+              </span>
             )}
           </div>
         </div>
 
-        {/* Details Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {/* 🌟 FULL COMPREHENSIVE ATTRIBUTE DETAILS GRID */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           
-          {/* Left Column */}
-          <div className="lg:col-span-2 space-y-8">
+          {/* LEFT COLUMN: Physical Specs, Biography, Specialties & Portfolio */}
+          <div className="lg:col-span-8 space-y-8">
             
-            {/* Bio */}
-            {model.bio && (
-              <div className="p-6 sm:p-7 rounded-3xl bg-slate-900/50 border border-slate-800/80 backdrop-blur-xl space-y-3 shadow-xl">
-                <h3 className="text-base font-bold text-white flex items-center gap-2">
-                  <Sparkles className="w-4.5 h-4.5 text-amber-400" /> Biography & Introduction
+            {/* 📏 COMPLETE PHYSICAL ATTRIBUTES BREAKDOWN CARD */}
+            <div className="p-6 sm:p-8 rounded-3xl bg-slate-950/80 border border-slate-800 space-y-6 shadow-xl">
+              <div className="flex items-center justify-between border-b border-slate-800 pb-4">
+                <h3 className="text-base sm:text-lg font-serif font-bold text-white flex items-center gap-2">
+                  <Ruler className="w-5 h-5 text-amber-400" /> Physical &amp; Vital Statistics
                 </h3>
-                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed whitespace-pre-line">
+                <span className="text-[10px] font-mono font-bold text-amber-400 uppercase tracking-widest bg-amber-500/10 px-2.5 py-1 rounded-md border border-amber-500/20">
+                  Full Roster Specs
+                </span>
+              </div>
+
+              {/* Physical Grid */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs">
+                {/* Height */}
+                <div className="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-1">
+                  <span className="text-slate-400 font-medium block text-[11px] uppercase tracking-wider">Height</span>
+                  <p className="text-base font-bold text-white font-mono">{formatHeight(model.height)}</p>
+                </div>
+
+                {/* Weight */}
+                <div className="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-1">
+                  <span className="text-slate-400 font-medium block text-[11px] uppercase tracking-wider">Weight</span>
+                  <p className="text-base font-bold text-white font-mono">{model.weight ? `${model.weight} kg` : "N/A"}</p>
+                </div>
+
+                {/* Hair Color */}
+                <div className="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-1">
+                  <span className="text-slate-400 font-medium block text-[11px] uppercase tracking-wider">Hair Color</span>
+                  <p className="text-base font-bold text-white capitalize">{model.hairColor || "Black"}</p>
+                </div>
+
+                {/* Eye Color */}
+                <div className="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-1">
+                  <span className="text-slate-400 font-medium block text-[11px] uppercase tracking-wider">Eye Color</span>
+                  <p className="text-base font-bold text-white capitalize">{model.eyeColor || "Brown"}</p>
+                </div>
+
+                {/* Age */}
+                <div className="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-1">
+                  <span className="text-slate-400 font-medium block text-[11px] uppercase tracking-wider">Age / DOB</span>
+                  <p className="text-base font-bold text-white font-mono">{age ? `${age} Yrs` : "N/A"}</p>
+                </div>
+
+                {/* Gender */}
+                <div className="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-1">
+                  <span className="text-slate-400 font-medium block text-[11px] uppercase tracking-wider">Gender</span>
+                  <p className="text-base font-bold text-white capitalize">{model.gender || "Female"}</p>
+                </div>
+
+                {/* Experience */}
+                <div className="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-1">
+                  <span className="text-slate-400 font-medium block text-[11px] uppercase tracking-wider">Experience Level</span>
+                  <p className="text-base font-bold text-amber-300 capitalize">{model.experience || "Intermediate"}</p>
+                </div>
+
+                {/* Category */}
+                <div className="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-1">
+                  <span className="text-slate-400 font-medium block text-[11px] uppercase tracking-wider">Discipline</span>
+                  <p className="text-base font-bold text-purple-300 capitalize">{categoryTag}</p>
+                </div>
+              </div>
+
+              {/* Bust / Waist / Hips Banner */}
+              {hasMeasurements && (
+                <div className="p-5 rounded-2xl bg-gradient-to-r from-slate-900 via-zinc-900 to-slate-900 border border-amber-500/30 space-y-2">
+                  <div className="flex items-center justify-between text-xs font-semibold text-amber-400 uppercase tracking-wider">
+                    <span>Bust – Waist – Hips Measurements</span>
+                    <span className="font-mono text-[10px] text-zinc-400">Inches (in)</span>
+                  </div>
+                  <div className="grid grid-cols-3 gap-3 text-center pt-1 font-mono">
+                    <div className="p-3 rounded-xl bg-slate-950/80 border border-amber-500/20">
+                      <span className="text-[10px] text-zinc-400 uppercase block">Bust</span>
+                      <span className="text-lg font-bold text-amber-300">{measurements.bust || "--"}"</span>
+                    </div>
+                    <div className="p-3 rounded-xl bg-slate-950/80 border border-amber-500/20">
+                      <span className="text-[10px] text-zinc-400 uppercase block">Waist</span>
+                      <span className="text-lg font-bold text-amber-300">{measurements.waist || "--"}"</span>
+                    </div>
+                    <div className="p-3 rounded-xl bg-slate-950/80 border border-amber-500/20">
+                      <span className="text-[10px] text-zinc-400 uppercase block">Hips</span>
+                      <span className="text-lg font-bold text-amber-300">{measurements.hips || "--"}"</span>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* 📝 BIOGRAPHY & INTRODUCTION */}
+            {model.bio && (
+              <div className="p-6 sm:p-8 rounded-3xl bg-slate-950/80 border border-slate-800 space-y-4 shadow-xl">
+                <h3 className="text-base sm:text-lg font-serif font-bold text-white flex items-center gap-2 border-b border-slate-800 pb-3">
+                  <Sparkles className="w-5 h-5 text-amber-400" /> Biography &amp; Professional Introduction
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed whitespace-pre-line font-light">
                   {model.bio}
                 </p>
               </div>
             )}
 
-            {/* Specialties */}
+            {/* 🌟 SPECIALTIES & SKILLS */}
             {model.specialties?.length > 0 && (
-              <div className="p-6 sm:p-7 rounded-3xl bg-slate-900/50 border border-slate-800/80 backdrop-blur-xl space-y-4 shadow-xl">
-                <h3 className="text-base font-bold text-white">{categoryTag} Specialties</h3>
+              <div className="p-6 sm:p-8 rounded-3xl bg-slate-950/80 border border-slate-800 space-y-4 shadow-xl">
+                <h3 className="text-base sm:text-lg font-serif font-bold text-white flex items-center gap-2 border-b border-slate-800 pb-3">
+                  <Award className="w-5 h-5 text-amber-400" /> {categoryTag} Specialties &amp; Industry Focus
+                </h3>
                 <div className="flex flex-wrap gap-2.5">
                   {model.specialties.map((spec: string, idx: number) => (
-                    <span key={idx} className="px-4 py-2 rounded-xl bg-amber-500/10 text-amber-300 border border-amber-500/20 text-xs font-semibold">
-                      {spec}
+                    <span
+                      key={idx}
+                      className="px-4 py-2 rounded-xl bg-amber-500/15 text-amber-300 border border-amber-500/30 text-xs font-semibold tracking-wide"
+                    >
+                      ✦ {spec}
                     </span>
                   ))}
                 </div>
               </div>
             )}
 
-            {/* Physical Stats (If available) */}
-            {(model.height || model.weight || model.measurements?.bust) && (
-              <div className="p-6 sm:p-7 rounded-3xl bg-slate-900/50 border border-slate-800/80 backdrop-blur-xl space-y-5 shadow-xl">
-                <h3 className="text-base font-bold text-white flex items-center gap-2">
-                  <Ruler className="w-4.5 h-4.5 text-amber-400" /> Physical Attributes
+            {/* 🗣️ LANGUAGES SPOKEN */}
+            {model.languages?.length > 0 && (
+              <div className="p-6 sm:p-8 rounded-3xl bg-slate-950/80 border border-slate-800 space-y-4 shadow-xl">
+                <h3 className="text-base sm:text-lg font-serif font-bold text-white flex items-center gap-2 border-b border-slate-800 pb-3">
+                  <Globe className="w-5 h-5 text-amber-400" /> Languages Spoken &amp; Communication
                 </h3>
-
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5 text-xs">
-                  <div className="p-4 rounded-2xl bg-slate-950/80 border border-slate-800/80 space-y-1">
-                    <span className="text-slate-400 font-medium block">Height</span>
-                    <p className="text-base font-bold text-white">{model.height ? `${model.height} cm` : "N/A"}</p>
-                  </div>
-                  <div className="p-4 rounded-2xl bg-slate-950/80 border border-slate-800/80 space-y-1">
-                    <span className="text-slate-400 font-medium block">Weight</span>
-                    <p className="text-base font-bold text-white">{model.weight ? `${model.weight} kg` : "N/A"}</p>
-                  </div>
+                <div className="flex flex-wrap gap-2.5">
+                  {model.languages.map((lang: string, idx: number) => (
+                    <span
+                      key={idx}
+                      className="px-4 py-2 rounded-xl bg-slate-900 text-slate-200 border border-slate-800 text-xs font-semibold"
+                    >
+                      🗣️ {lang}
+                    </span>
+                  ))}
                 </div>
               </div>
             )}
 
-            {/* Portfolio Gallery */}
+            {/* 🖼️ PORTFOLIO GALLERY & VIDEOS */}
             {portfolio.length > 0 && (
-              <div className="space-y-4 pt-2">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-lg font-serif font-bold text-white tracking-wide">Portfolio & Works</h3>
-                  <span className="text-xs font-medium px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-slate-400">
+              <div className="p-6 sm:p-8 rounded-3xl bg-slate-950/80 border border-slate-800 space-y-6 shadow-xl">
+                <div className="flex items-center justify-between border-b border-slate-800 pb-4">
+                  <h3 className="text-base sm:text-lg font-serif font-bold text-white tracking-wide flex items-center gap-2">
+                    <Sparkles className="w-5 h-5 text-amber-400" /> Portfolio Showcase &amp; Works
+                  </h3>
+                  <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-amber-400">
                     {portfolio.length} {portfolio.length === 1 ? "Item" : "Items"}
                   </span>
                 </div>
@@ -328,23 +481,23 @@ export default function PublicModelDetailPage() {
                       <button
                         key={item._id}
                         onClick={() => setLightboxIndex(i)}
-                        className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-slate-950 border border-slate-800/80 group transition-all duration-300 hover:border-amber-500/40"
+                        className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-slate-900 border border-slate-800 group transition-all duration-300 hover:border-amber-400/60 shadow-lg cursor-pointer"
                       >
                         {item.type === "image" ? (
                           <img
                             src={item.url}
                             alt={item.caption || model.name}
-                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                           />
                         ) : isYt ? (
                           <div className="w-full h-full relative">
                             <img
                               src={`https://img.youtube.com/vi/${item.url.split(/[?&]v=|youtu\.be\//).pop()?.split("&")[0]}/hqdefault.jpg`}
                               alt={item.caption || "Video"}
-                              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                             />
                             <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                              <div className="w-10 h-10 rounded-full bg-amber-400/90 text-slate-950 flex items-center justify-center shadow-lg">
+                              <div className="w-10 h-10 rounded-full bg-amber-400 text-slate-950 flex items-center justify-center shadow-lg">
                                 <Play className="w-5 h-5 fill-current ml-0.5" />
                               </div>
                             </div>
@@ -353,12 +506,31 @@ export default function PublicModelDetailPage() {
                           <div className="w-full h-full relative">
                             <video src={item.url} className="w-full h-full object-cover" muted />
                             <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-                              <div className="w-10 h-10 rounded-full bg-amber-400/90 text-slate-950 flex items-center justify-center shadow-lg">
+                              <div className="w-10 h-10 rounded-full bg-amber-400 text-slate-950 flex items-center justify-center shadow-lg">
                                 <Play className="w-5 h-5 fill-current ml-0.5" />
                               </div>
                             </div>
                           </div>
                         )}
+
+                        {item.isCover && (
+                          <span className="absolute top-2 left-2 text-[10px] font-bold uppercase tracking-wider bg-amber-400 text-slate-950 px-2 py-0.5 rounded-md shadow-md">
+                            Cover
+                          </span>
+                        )}
+
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-3 text-left">
+                          {item.category && (
+                            <span className="text-[11px] font-semibold text-amber-300 uppercase tracking-wide">
+                              {item.category}
+                            </span>
+                          )}
+                          {item.caption && (
+                            <p className="text-xs text-slate-200 line-clamp-1 mt-0.5 font-normal">
+                              {item.caption}
+                            </p>
+                          )}
+                        </div>
                       </button>
                     );
                   })}
@@ -367,24 +539,31 @@ export default function PublicModelDetailPage() {
             )}
           </div>
 
-          {/* Right Column */}
-          <div className="space-y-6">
-            <div className="p-6 rounded-3xl bg-slate-900/60 border border-slate-800/80 backdrop-blur-2xl space-y-6 shadow-2xl sticky top-8">
-              <h3 className="text-base font-bold text-white flex items-center justify-between border-b border-slate-800/80 pb-3">
-                <span>Social Profiles</span>
+          {/* RIGHT COLUMN: Social Media, Location & Booking Action Card */}
+          <div className="lg:col-span-4 space-y-6">
+            
+            {/* 📱 SOCIAL PROFILES & ONLINE LINKS */}
+            <div className="p-6 rounded-3xl bg-slate-950/80 border border-slate-800 space-y-6 shadow-xl sticky top-8">
+              <div className="border-b border-slate-800 pb-3 flex items-center justify-between">
+                <h3 className="text-base font-bold text-white flex items-center gap-2">
+                  <Share2 className="w-4 h-4 text-amber-400" /> Verified Social Profiles
+                </h3>
                 <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
-              </h3>
+              </div>
 
-              {social.instagram || social.facebook || social.twitter || social.youtube || social.tiktok ? (
+              {social.instagram || social.facebook || social.twitter || social.youtube || social.tiktok || social.portfolioWebsite ? (
                 <div className="space-y-3 text-xs">
                   {social.instagram && (
                     <a
                       href={social.instagram}
                       target="_blank"
                       rel="noreferrer"
-                      className="flex items-center gap-3 p-3.5 rounded-2xl bg-pink-950/30 border border-pink-900/40 text-pink-300 hover:border-pink-500/50 transition font-semibold"
+                      className="flex items-center gap-3 p-3.5 rounded-2xl bg-gradient-to-r from-pink-950/30 to-purple-950/30 border border-pink-900/40 text-pink-300 hover:border-pink-500/50 hover:bg-pink-950/50 transition duration-300 font-semibold shadow-sm group"
                     >
-                      <Instagram className="w-4 h-4 text-pink-400" /> Instagram
+                      <div className="p-2 rounded-xl bg-pink-500/10 group-hover:scale-110 transition-transform">
+                        <Instagram className="w-4 h-4 text-pink-400" />
+                      </div>
+                      <span className="truncate">Instagram Profile</span>
                     </a>
                   )}
                   {social.youtube && (
@@ -392,38 +571,156 @@ export default function PublicModelDetailPage() {
                       href={social.youtube}
                       target="_blank"
                       rel="noreferrer"
-                      className="flex items-center gap-3 p-3.5 rounded-2xl bg-red-950/30 border border-red-900/40 text-red-300 hover:border-red-500/50 transition font-semibold"
+                      className="flex items-center gap-3 p-3.5 rounded-2xl bg-gradient-to-r from-red-950/30 to-slate-950/30 border border-red-900/40 text-red-300 hover:border-red-500/50 hover:bg-red-950/50 transition duration-300 font-semibold shadow-sm group"
                     >
-                      <Youtube className="w-4 h-4 text-red-400" /> YouTube
+                      <div className="p-2 rounded-xl bg-red-500/10 group-hover:scale-110 transition-transform">
+                        <Youtube className="w-4 h-4 text-red-400" />
+                      </div>
+                      <span className="truncate">YouTube Channel</span>
+                    </a>
+                  )}
+                  {social.facebook && (
+                    <a
+                      href={social.facebook}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex items-center gap-3 p-3.5 rounded-2xl bg-gradient-to-r from-blue-950/30 to-slate-950/30 border border-blue-900/40 text-blue-300 hover:border-blue-500/50 hover:bg-blue-950/50 transition duration-300 font-semibold shadow-sm group"
+                    >
+                      <div className="p-2 rounded-xl bg-blue-500/10 group-hover:scale-110 transition-transform">
+                        <Facebook className="w-4 h-4 text-blue-400" />
+                      </div>
+                      <span className="truncate">Facebook Profile</span>
+                    </a>
+                  )}
+                  {social.twitter && (
+                    <a
+                      href={social.twitter}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex items-center gap-3 p-3.5 rounded-2xl bg-slate-900 border border-slate-800 text-slate-300 hover:border-sky-500/50 transition duration-300 font-semibold shadow-sm group"
+                    >
+                      <div className="p-2 rounded-xl bg-sky-500/10 group-hover:scale-110 transition-transform">
+                        <Twitter className="w-4 h-4 text-sky-400" />
+                      </div>
+                      <span className="truncate">X (Twitter) Handle</span>
+                    </a>
+                  )}
+                  {social.tiktok && (
+                    <a
+                      href={social.tiktok}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex items-center gap-3 p-3.5 rounded-2xl bg-slate-900 border border-slate-800 text-slate-300 hover:border-slate-400 transition duration-300 font-semibold shadow-sm group"
+                    >
+                      <div className="p-2 rounded-xl bg-slate-800 group-hover:scale-110 transition-transform">
+                        <Music2 className="w-4 h-4 text-slate-300" />
+                      </div>
+                      <span className="truncate">TikTok Profile</span>
+                    </a>
+                  )}
+                  {social.portfolioWebsite && (
+                    <a
+                      href={social.portfolioWebsite}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex items-center gap-3 p-3.5 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-300 hover:border-amber-500/60 transition duration-300 font-semibold shadow-sm group"
+                    >
+                      <div className="p-2 rounded-xl bg-amber-500/20 group-hover:scale-110 transition-transform">
+                        <Globe className="w-4 h-4 text-amber-400" />
+                      </div>
+                      <span className="truncate">Official Website</span>
                     </a>
                   )}
                 </div>
               ) : (
-                <p className="text-xs text-slate-500 italic text-center py-2">No social links added.</p>
+                <p className="text-xs text-slate-500 italic text-center py-2">No social links attached.</p>
               )}
+
+              {/* Status Details */}
+              <div className="pt-4 border-t border-slate-800 text-xs text-slate-400 space-y-3">
+                <div className="flex items-center justify-between p-3 rounded-2xl bg-slate-900 border border-slate-800">
+                  <span className="text-slate-400 font-medium">Profile Verification</span>
+                  <span className="text-emerald-400 font-bold uppercase tracking-wider bg-emerald-500/10 px-2.5 py-1 rounded-lg border border-emerald-500/20">
+                    {model.isVerified ? "Verified" : "Pending"}
+                  </span>
+                </div>
+                <div className="flex items-center justify-between p-3 rounded-2xl bg-slate-900 border border-slate-800">
+                  <span className="text-slate-400 font-medium">Current Availability</span>
+                  <span className="text-amber-300 font-semibold bg-amber-500/10 px-2.5 py-1 rounded-lg border border-amber-500/20">
+                    {model.availability || "Available"}
+                  </span>
+                </div>
+              </div>
+
+              {/* Booking CTA Button */}
+              <div className="pt-2">
+                <Link
+                  href={`/ContactPage?subject=Booking Inquiry: ${encodeURIComponent(model.name)}`}
+                  className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-black px-6 py-3.5 rounded-xl font-extrabold text-xs uppercase tracking-wider hover:from-amber-300 hover:to-amber-500 transition-all shadow-[0_0_20px_rgba(212,175,55,0.3)]"
+                >
+                  <Zap className="w-4 h-4" />
+                  <span>Book {model.name}</span>
+                </Link>
+              </div>
+
             </div>
           </div>
+
         </div>
       </div>
 
       {/* Lightbox Modal */}
       {lightboxIndex !== null && portfolio[lightboxIndex] && (
         <div
-          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-4 sm:p-6"
           onClick={() => setLightboxIndex(null)}
         >
           <button
             onClick={() => setLightboxIndex(null)}
-            className="absolute top-5 right-5 p-3 rounded-full bg-slate-900 text-slate-300 hover:text-white"
+            className="absolute top-5 right-5 p-3 rounded-full bg-slate-900 text-slate-300 hover:text-white border border-slate-800 hover:border-amber-500/40 transition-all z-10"
           >
             <X className="w-5 h-5" />
           </button>
-          <div className="max-w-4xl max-h-[85vh] w-full" onClick={(e) => e.stopPropagation()}>
-            <img
-              src={portfolio[lightboxIndex].url}
-              alt="Portfolio"
-              className="w-full h-full max-h-[80vh] object-contain mx-auto rounded-2xl"
-            />
+
+          {lightboxIndex > 0 && (
+            <button
+              onClick={(e) => { e.stopPropagation(); setLightboxIndex(lightboxIndex - 1); }}
+              className="absolute left-3 sm:left-6 p-3 rounded-full bg-slate-900 text-slate-300 hover:text-white border border-slate-800 hover:border-amber-500/40 transition-all z-10"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+          )}
+          {lightboxIndex < portfolio.length - 1 && (
+            <button
+              onClick={(e) => { e.stopPropagation(); setLightboxIndex(lightboxIndex + 1); }}
+              className="absolute right-3 sm:right-6 p-3 rounded-full bg-slate-900 text-slate-300 hover:text-white border border-slate-800 hover:border-amber-500/40 transition-all z-10"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+          )}
+
+          <div className="max-w-4xl max-h-[85vh] w-full flex flex-col items-center justify-center" onClick={(e) => e.stopPropagation()}>
+            {portfolio[lightboxIndex].type === "image" ? (
+              <img
+                src={portfolio[lightboxIndex].url}
+                alt={portfolio[lightboxIndex].caption || model.name}
+                className="w-full h-full max-h-[80vh] object-contain mx-auto rounded-2xl shadow-2xl border border-slate-800"
+              />
+            ) : isYoutubeUrl(portfolio[lightboxIndex].url) ? (
+              <iframe
+                src={getYoutubeEmbedUrl(portfolio[lightboxIndex].url)}
+                className="w-full aspect-video rounded-2xl border border-slate-800 shadow-2xl"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowFullScreen
+              />
+            ) : (
+              <video src={portfolio[lightboxIndex].url} controls autoPlay className="w-full max-h-[80vh] rounded-2xl border border-slate-800 shadow-2xl" />
+            )}
+            {portfolio[lightboxIndex].caption && (
+              <p className="mt-4 text-center text-sm text-slate-200 bg-slate-900 px-4 py-2 rounded-xl border border-slate-800 backdrop-blur-md">
+                {portfolio[lightboxIndex].caption}
+              </p>
+            )}
           </div>
         </div>
       )}

@@ -712,7 +712,7 @@ export const getAllModels = async (req, res) => {
   try {
     const { 
       page = 1, 
-      limit = 20,
+      limit = 50,
       category, 
       specialty, 
       experience,
@@ -722,17 +722,16 @@ export const getAllModels = async (req, res) => {
     } = req.query;
 
     const filter = { 
-      status: 'active',
-      isVerified: true,
+      status: { $ne: 'suspended' },
     };
     
-    // Category filter (Case-insensitive match for category pages: /actors, /singers, /painters, etc.)
-    if (category) {
+    // Category filter (Case-insensitive match for category pages: /models, /actors, /singers, etc.)
+    if (category && category.toLowerCase() !== 'all') {
       filter.category = new RegExp(`^${category}$`, 'i');
     }
     if (specialty) filter.specialties = specialty;
-    if (experience) filter.experience = experience;
-    if (gender) filter.gender = gender;
+    if (experience && experience.toLowerCase() !== 'all') filter.experience = experience;
+    if (gender && gender.toLowerCase() !== 'all') filter.gender = gender;
 
     if (search) {
       filter.$or = [
