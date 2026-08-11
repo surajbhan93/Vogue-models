@@ -108,13 +108,21 @@ export default function PublicModelsPage() {
       const matchExp = model.experience?.toLowerCase().includes(q);
       const matchSpecialty = model.specialties?.some((s) => s.toLowerCase().includes(q));
 
-      if (!matchName && !matchCity && !matchState && !matchCountry && !matchBio && !matchExp && !matchSpecialty) {
+      if (
+        !matchName &&
+        !matchCity &&
+        !matchState &&
+        !matchCountry &&
+        !matchBio &&
+        !matchExp &&
+        !matchSpecialty
+      ) {
         return false;
       }
     }
 
     if (genderFilter !== "all") {
-      if (model.gender?.toLowerCase() !== genderFilter.toLowerCase() && model.gender !== "All") {
+      if (model.gender?.toLowerCase() !== genderFilter.toLowerCase()) {
         return false;
       }
     }
@@ -129,172 +137,180 @@ export default function PublicModelsPage() {
   });
 
   return (
-    <div className="min-h-screen bg-[#07090e] text-slate-100 selection:bg-amber-500 selection:text-black pt-6 pb-24">
-      <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-gradient-to-b from-amber-500/10 via-purple-600/5 to-transparent blur-3xl rounded-full" />
+    <div className="min-h-screen bg-[#07090e] text-slate-100 selection:bg-amber-500 selection:text-black py-12 px-4 sm:px-6 lg:px-8">
+      {/* Background Ambient Glow */}
+      <div className="pointer-events-none fixed inset-0 z-0">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-amber-500/10 blur-[140px] rounded-full" />
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        {/* HERO HEADER */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 pt-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-bold bg-amber-500/10 text-amber-300 border border-amber-500/30 uppercase tracking-widest">
-            <Crown className="w-3.5 h-3.5 text-amber-400" /> Vogue Verified Talent Roster
+      <div className="max-w-7xl mx-auto space-y-10 relative z-10">
+        {/* Header Hero Section */}
+        <div className="text-center space-y-4 max-w-3xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono font-bold uppercase tracking-widest shadow-[0_0_20px_rgba(212,175,55,0.15)]">
+            <Crown className="w-3.5 h-3.5 text-amber-400" />
+            Vogue Verified Talent Roster
           </div>
 
-          <h1 className="text-3xl sm:text-5xl font-serif font-extrabold text-white tracking-tight leading-tight">
-            Discover Exceptional <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500">Models</span>
+          <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight">
+            Discover Exceptional <span className="gold-gradient-text">Models</span>
           </h1>
 
-          <p className="text-xs sm:text-sm text-slate-400 max-w-xl mx-auto leading-relaxed">
+          <p className="text-zinc-400 text-sm sm:text-base font-light leading-relaxed">
             Browse professional fashion, commercial, and runway models available for pageants, fashion hunts, catalog shoots, and brand campaigns.
           </p>
+        </div>
 
-          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
-            <div className="relative flex-1 w-full max-w-md">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-amber-400/70" />
-              <input
-                type="text"
-                placeholder="Search by model name, city, bio, specialty..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                className="w-full bg-slate-950/90 border border-slate-800 rounded-2xl pl-11 pr-4 py-3 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-amber-500/60 shadow-inner"
-              />
-            </div>
+        {/* Filter Controls Bar */}
+        <div className="p-4 rounded-2xl bg-zinc-950/80 border border-zinc-800 shadow-xl flex flex-col md:flex-row items-center gap-4 backdrop-blur-md">
+          {/* Search Input */}
+          <div className="relative w-full md:flex-1">
+            <Search className="w-4 h-4 text-zinc-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+            <input
+              type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Search by name, city, specialty, or bio..."
+              className="w-full bg-zinc-900 text-white placeholder-zinc-500 text-xs sm:text-sm rounded-xl pl-10 pr-4 py-3 border border-zinc-800 focus:outline-none focus:border-amber-400 shadow-inner"
+            />
+          </div>
 
+          {/* Gender Filter */}
+          <div className="w-full md:w-48">
             <select
               value={genderFilter}
               onChange={(e) => setGenderFilter(e.target.value)}
-              className="bg-slate-950/90 border border-slate-800 rounded-2xl px-4 py-3 text-xs font-semibold text-slate-200 focus:outline-none focus:border-amber-500/60 cursor-pointer"
+              className="w-full bg-zinc-900 text-white text-xs sm:text-sm rounded-xl px-3 py-3 border border-zinc-800 focus:outline-none focus:border-amber-400"
             >
               <option value="all">All Genders</option>
-              <option value="Male">Male Models</option>
-              <option value="Female">Female Models</option>
-              <option value="Other">Other</option>
+              <option value="female">Female</option>
+              <option value="male">Male</option>
+              <option value="other">Other</option>
             </select>
+          </div>
 
+          {/* Experience Filter */}
+          <div className="w-full md:w-48">
             <select
               value={experienceFilter}
               onChange={(e) => setExperienceFilter(e.target.value)}
-              className="bg-slate-950/90 border border-slate-800 rounded-2xl px-4 py-3 text-xs font-semibold text-slate-200 focus:outline-none focus:border-amber-500/60 cursor-pointer"
+              className="w-full bg-zinc-900 text-white text-xs sm:text-sm rounded-xl px-3 py-3 border border-zinc-800 focus:outline-none focus:border-amber-400"
             >
               <option value="all">All Experience</option>
-              <option value="Beginner">Beginner</option>
-              <option value="Intermediate">Intermediate</option>
-              <option value="Professional">Professional</option>
-              <option value="Expert">Expert</option>
+              <option value="beginner">Beginner</option>
+              <option value="intermediate">Intermediate</option>
+              <option value="professional">Professional</option>
+              <option value="expert">Expert</option>
             </select>
           </div>
         </div>
 
-        {/* MODELS GALLERY GRID */}
+        {/* Models Roster Grid */}
         {loading ? (
-          <div className="text-center py-20 text-slate-400 space-y-3">
-            <Sparkles className="w-8 h-8 text-amber-400 animate-spin mx-auto" />
-            <p className="text-xs font-medium">Loading model roster...</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => (
+              <div
+                key={n}
+                className="h-96 rounded-3xl bg-zinc-900 border border-zinc-800 animate-pulse"
+              />
+            ))}
           </div>
         ) : filteredModels.length === 0 ? (
-          <div className="text-center py-20 border border-dashed border-slate-800 rounded-3xl text-slate-400 space-y-2">
-            <User className="w-10 h-10 text-slate-600 mx-auto" />
-            <h3 className="text-base font-bold text-white">No Models Found</h3>
-            <p className="text-xs max-w-sm mx-auto">No model records match your search or category filters.</p>
+          <div className="text-center py-20 bg-zinc-950/60 border border-zinc-800 rounded-3xl space-y-4">
+            <div className="w-16 h-16 rounded-2xl bg-amber-500/10 text-amber-400 mx-auto flex items-center justify-center border border-amber-500/20">
+              <User className="w-8 h-8" />
+            </div>
+            <h3 className="font-serif text-xl font-bold text-white">No Models Found</h3>
+            <p className="text-xs text-zinc-400 max-w-sm mx-auto">
+              No model profiles match your search criteria. Try adjusting your search query or filters.
+            </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {filteredModels.map((model) => (
-              <CompCard key={model._id} model={model} />
-            ))}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:grid-cols-4 gap-6">
+            {filteredModels.map((m) => {
+              const age = getAge(m.dateOfBirth);
+              const city = m.preferredLocation?.city || "New York";
+              const state = m.preferredLocation?.state || "NY";
+              const targetSlug = m.slug || m._id;
+
+              return (
+                <Link
+                  key={m._id}
+                  href={`/models/${targetSlug}`}
+                  className="group relative rounded-3xl overflow-hidden bg-zinc-950/80 border border-zinc-800/80 shadow-[0_10px_30px_rgba(0,0,0,0.8)] hover:shadow-[0_20px_40px_rgba(212,175,55,0.2)] hover:border-amber-500/50 transition-all duration-500 flex flex-col justify-between"
+                >
+                  {/* Image Container */}
+                  <div className="relative aspect-[3/4] w-full overflow-hidden bg-zinc-900">
+                    <img
+                      src={
+                        m.profileImage ||
+                        (m.gender === "Female"
+                          ? "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80"
+                          : "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=800&q=80")
+                      }
+                      alt={m.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+
+                    {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent" />
+
+                    {/* Top Badges */}
+                    <div className="absolute top-3 left-3 right-3 flex items-center justify-between z-10">
+                      {m.isFeatured ? (
+                        <span className="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase bg-amber-400 text-black shadow-md">
+                          Featured
+                        </span>
+                      ) : (
+                        <span className="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase bg-black/60 backdrop-blur-md text-amber-300 border border-white/20">
+                          {m.experience || "Model"}
+                        </span>
+                      )}
+
+                      {m.specialties && m.specialties.length > 0 && (
+                        <span className="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase bg-black/60 backdrop-blur-md text-white border border-white/20">
+                          {m.specialties[0]}
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Bottom Info Overlay */}
+                    <div className="absolute bottom-3 left-3 right-3 text-white space-y-1">
+                      <div className="flex items-center gap-1 text-[11px] text-zinc-400">
+                        <MapPin className="w-3 h-3 text-rose-400 shrink-0" />
+                        <span>
+                          {city}, {state}
+                        </span>
+                      </div>
+                      <h3 className="font-serif text-xl font-bold text-white group-hover:text-amber-300 transition-colors flex items-center gap-1.5">
+                        <span>{m.name}</span>
+                        {m.isVerified && (
+                          <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+                        )}
+                      </h3>
+                    </div>
+                  </div>
+
+                  {/* Card Bottom Specs */}
+                  <div className="p-4 bg-zinc-950 border-t border-zinc-800/80 flex items-center justify-between text-xs text-zinc-400">
+                    <div className="flex items-center gap-3">
+                      {m.height && (
+                        <span className="flex items-center gap-1 font-mono">
+                          <Ruler className="w-3.5 h-3.5 text-amber-400" /> {m.height} cm
+                        </span>
+                      )}
+                      {age && <span className="font-mono">{age} Yrs</span>}
+                    </div>
+
+                    <span className="text-amber-400 font-bold uppercase tracking-wider text-[10px] group-hover:translate-x-1 transition-transform flex items-center gap-0.5">
+                      View Comp Card <ArrowUpRight className="w-3 h-3" />
+                    </span>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         )}
       </div>
-    </div>
-  );
-}
-
-// ============================================================
-// 🔹 COMP CARD — matches the reference: badges, portrait photo,
-// hover-reveal stats panel, and a bottom info bar.
-// ============================================================
-function CompCard({ model }: { model: ModelProfile }) {
-  const age = getAge(model.dateOfBirth);
-  const category = model.specialties?.[0] || model.experience || "Model";
-
-  return (
-    <div className="group relative rounded-2xl overflow-hidden border border-white/10 bg-black shadow-xl hover:border-amber-500/40 transition-colors duration-300">
-      {/* Portrait photo */}
-      <div className="relative aspect-[3/4] overflow-hidden">
-        <img
-          src={
-            model.profileImage ||
-            (model.gender === "Female"
-              ? "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80"
-              : "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=800&q=80")
-          }
-          alt={model.name || "Model"}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-
-        {/* Top badges */}
-        <div className="absolute top-3 left-3 right-3 flex items-center justify-between z-10">
-          {(model.isFeatured ?? model.isVerified) && (
-            <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-amber-500/15 text-amber-300 border border-amber-400/40 uppercase tracking-wider backdrop-blur-md">
-              Featured
-            </span>
-          )}
-          <span className="ml-auto px-2.5 py-1 rounded-full text-[10px] font-bold bg-black/60 text-slate-100 border border-white/15 uppercase tracking-wider backdrop-blur-md">
-            {category}
-          </span>
-        </div>
-
-        {/* Hover-reveal stats panel */}
-        <div className="absolute inset-x-0 bottom-0 translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 ease-out bg-black/75 backdrop-blur-md px-4 py-3 grid grid-cols-2 gap-x-4 gap-y-2 text-[11px]">
-          <Stat label="Height" value={model.height ? `${model.height} cm` : "—"} />
-          <Stat label="Weight" value={model.weight ? `${model.weight} kg` : "—"} />
-          <Stat label="Gender" value={model.gender || "—"} />
-          <Stat label="Age" value={age ? `${age} yrs` : "—"} />
-        </div>
-      </div>
-
-      {/* Bottom info bar */}
-      <div className="p-4 bg-[#0c0c0e] space-y-2">
-        <div className="flex items-center justify-between text-[11px] text-slate-400">
-          <span className="flex items-center gap-1 truncate">
-            <MapPin className="w-3.5 h-3.5 text-rose-400 shrink-0" />
-            {model.preferredLocation?.city
-              ? `${model.preferredLocation.city}${model.preferredLocation.state ? ` / ${model.preferredLocation.state}` : ""}`
-              : "Location N/A"}
-          </span>
-          {typeof model.rating === "number" && model.rating > 0 && (
-            <span className="flex items-center gap-1 text-amber-300 font-semibold shrink-0">
-              <Star className="w-3.5 h-3.5 fill-amber-300" /> {model.rating.toFixed(1)}
-            </span>
-          )}
-        </div>
-
-        <h3 className="text-lg font-serif font-bold text-white truncate flex items-center gap-1.5">
-          {model.name}
-          {model.isVerified && <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 shrink-0" />}
-        </h3>
-
-        <div className="h-px bg-white/10" />
-
-        <Link
-          href={`/models/${model.slug}`}
-          className="flex items-center justify-between text-[11px] font-bold uppercase tracking-widest text-amber-300 hover:text-amber-200 transition-colors pt-1"
-        >
-          View Comp Card
-          <ArrowUpRight className="w-3.5 h-3.5" />
-        </Link>
-      </div>
-    </div>
-  );
-}
-
-function Stat({ label, value }: { label: string; value: string }) {
-  return (
-    <div>
-      <span className="block text-slate-400 uppercase tracking-wide text-[9px]">{label}</span>
-      <span className="block text-slate-100 font-semibold">{value}</span>
     </div>
   );
 }

@@ -6,7 +6,6 @@
   --font-serif: 'Playfair Display', serif;
   --font-sans: 'Inter', sans-serif;
 }
-/* Add at the bottom of app/globals.css */
 
 /* 🔹 Hardware GPU Acceleration for Smooth Animations */
 .gpu-accelerate {
@@ -21,6 +20,8 @@ html {
   scroll-behavior: smooth;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  background-color: #07090e;
+  color: #f4f4f5;
 }
 
 /* 🔹 Hide Scrollbars for Horizontal Scrolling */
@@ -31,12 +32,15 @@ html {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* 🌟 LUXURY DARK HIGH-FASHION THEME */
 body {
-  background-color: #09090b;
-  color: #f4f4f5;
+  background-color: #07090e !important;
+  color: #f4f4f5 !important;
   font-family: var(--font-sans);
   overflow-x: hidden;
 }
+
 /* ===========================
    DARK SELECT
 =========================== */
@@ -74,6 +78,7 @@ select option:checked {
   background: #D4AF37;
   color: #111111;
 }
+
 .glass-panel {
   background: rgba(24, 24, 27, 0.75);
   backdrop-filter: blur(16px);

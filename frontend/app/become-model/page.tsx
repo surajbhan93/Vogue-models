@@ -6,7 +6,7 @@ import { Hero } from '@/components/Hero';
 import { RegistrationForm } from '@/components/models/RegistrationForm';
 
 export const metadata: Metadata = {
-  title: 'Become a Vogue Model & Actor | High Fashion Talent Representation 2026',
+  title: 'Become a Vogue Model & Talent | Official Registration Portal 2027',
   description: 'Apply for representation with Vogue Model & Talent Management. International fashion shows, brand campaigns, cinema casting, and editorial photoshoots.',
 };
 
@@ -35,7 +35,7 @@ export default function BecomeModelPage() {
           <ArrowLeft className="w-4 h-4" />
           Back to Home
         </Link>
-        <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900/90 border border-amber-500/30 text-amber-300 text-xs font-mono font-bold uppercase backdrop-blur-md">
+        <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-900/90 border border-amber-500/30 text-amber-300 text-xs font-mono font-bold uppercase backdrop-blur-md">
           <Crown className="w-3.5 h-3.5 text-amber-400" /> Vogue Casting Portal
         </div>
       </header>
@@ -70,12 +70,12 @@ export default function BecomeModelPage() {
           <div className="text-center max-w-3xl mx-auto mb-10 space-y-3">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/30 text-xs font-mono uppercase tracking-widest shadow-[0_0_20px_rgba(212,175,55,0.15)]">
               <Sparkles className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
-              Official Vogue Scouting Roster 2026
+              Official Vogue Scouting Roster 2027
             </div>
-            <h2 className="font-serif text-3xl sm:text-5xl font-bold text-white tracking-tight">
+            <h2 className="font-serif text-2xl sm:text-4xl font-bold text-white tracking-tight">
               Submit Your Digital Scouting Profile
             </h2>
-            <p className="text-zinc-400 text-sm sm:text-base max-w-xl mx-auto font-light leading-relaxed">
+            <p className="text-zinc-400 text-xs sm:text-sm max-w-xl mx-auto font-light leading-relaxed">
               No prior agency experience required. Our international bookers evaluate natural charisma, potential, and creative talent.
             </p>
           </div>
@@ -91,8 +91,8 @@ export default function BecomeModelPage() {
               <div className="w-10 h-10 mx-auto rounded-full bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400">
                 <Shield className="w-5 h-5" />
               </div>
-              <h4 className="font-serif text-base font-bold text-white">100% Free Scouting</h4>
-              <p className="text-xs text-zinc-400">Vogue never charges registration or evaluation fees for talent representation.</p>
+              <h4 className="font-serif text-base font-bold text-white">Step 1 Free Registration</h4>
+              <p className="text-xs text-zinc-400">Step 1 registration is 100% Free. Step 2 evaluation ₹999 &amp; Step 3 USA Workshop ₹1,499.</p>
             </div>
 
             <div className="p-5 rounded-2xl bg-zinc-900/80 border border-zinc-800 text-center space-y-2 backdrop-blur-md">
@@ -114,24 +114,6 @@ export default function BecomeModelPage() {
         </section>
 
       </main>
-
-      {/* Luxury Footer */}
-      <footer className="relative z-10 border-t border-zinc-800/80 bg-zinc-950 py-6 px-6 text-center text-xs text-zinc-500 overflow-hidden">
-        <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-          <img
-            src="http://images.unsplash.com/photo-1568535904307-f48b760a39f3?q=80&w=1331&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="Footer Background"
-            className="w-full h-full object-cover object-center opacity-35 filter brightness-75 contrast-125 saturate-50 mix-blend-luminosity"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-zinc-950/90 via-zinc-950/85 to-zinc-950/95" />
-        </div>
-        <div className="relative z-10 max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 font-mono text-[11px]">
-          <div>© 2026 VOGUE MODEL & TALENT MANAGEMENT • GLOBAL SCOUTING</div>
-          <div className="flex items-center gap-4 text-zinc-400">
-            <span>PARIS</span> • <span>MILAN</span> • <span>NEW YORK</span> • <span>LONDON</span> • <span>TOKYO</span>
-          </div>
-        </div>
-      </footer>
 
     </div>
   );

@@ -24,7 +24,7 @@ export function HeroContent({
         <SectionBadge icon>{badgeText}</SectionBadge>
       </div>
 
-      <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.05] uppercase animate-in fade-in slide-in-from-bottom-6 duration-1000">
+      <h1 className="font-serif text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-tight uppercase animate-in fade-in slide-in-from-bottom-6 duration-1000">
         {titlePrefix}{' '}
         <span className="gold-gradient-text italic font-normal lowercase">
           {titleHighlight}

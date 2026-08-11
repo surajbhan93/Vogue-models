@@ -430,6 +430,45 @@ export const RegistrationForm: React.FC = () => {
   return (
     <GlassCard glow bgImage={currentBgImage} className="w-full max-w-4xl mx-auto my-6 p-6 sm:p-10 border-amber-500/40">
       
+      {/* 📌 OFFICIAL REGISTRATION & FEE POLICY NOTICE (PLACED AT VERY TOP) */}
+      <div className="mb-6 p-5 sm:p-6 rounded-2xl bg-zinc-950/90 border border-amber-500/40 text-left space-y-3 shadow-xl backdrop-blur-xl">
+        <div className="flex items-center gap-2 text-amber-400 font-mono text-xs uppercase font-bold tracking-wider">
+          <ShieldCheck className="w-4 h-4 text-amber-400 shrink-0" />
+          <span>Official Registration &amp; Fee Policy</span>
+        </div>
+
+        <h3 className="font-serif text-base sm:text-lg font-bold text-white">
+          Registration &amp; Fee Guidelines
+        </h3>
+
+        <ul className="space-y-2.5 text-xs sm:text-sm text-zinc-300 font-normal leading-relaxed">
+          <li className="flex items-start gap-2">
+            <span className="text-amber-400 font-bold text-base leading-none mt-0.5">•</span>
+            <span>
+              <strong>Registration is Free in starting:</strong> Step 1 registration is <strong>100% FREE</strong>.
+            </span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="text-amber-400 font-bold text-base leading-none mt-0.5">•</span>
+            <span>
+              <strong>Step 2 Evaluation Fee (₹ 999):</strong> After 1st step, you have to pay <strong>₹ 999</strong> evaluation fee. This fee is <strong>strictly non-refundable and non-transferable</strong> under any circumstances, including disqualification or voluntary withdrawal.
+            </span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="text-amber-400 font-bold text-base leading-none mt-0.5">•</span>
+            <span>
+              <strong>Step 3 USA Training Workshop (₹ 1,499):</strong> On 2nd step, you have to pay <strong>₹ 1,499</strong>. In this step, you will receive a <strong>Free Training Workshop from America</strong> where you will get training in your specialized field.
+            </span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="text-amber-400 font-bold text-base leading-none mt-0.5">•</span>
+            <span>
+              <strong>Accurate Details Mandatory:</strong> Participants must ensure all details filled in the registration form are accurate. Any false information will lead to immediate disqualification without a refund.
+            </span>
+          </li>
+        </ul>
+      </div>
+
       {/* 🌟 TOP VISUAL SHOWCASE STRIP (ALL 11 IMAGES) */}
       <div className="mb-8 p-4 rounded-2xl bg-zinc-950/80 border border-amber-500/30 space-y-3 shadow-xl backdrop-blur-xl">
         <div className="flex items-center justify-between text-xs font-mono uppercase tracking-widest text-amber-400">

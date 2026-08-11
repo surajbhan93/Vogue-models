@@ -54,7 +54,7 @@ export const GlassCard: React.FC<GlassCardProps> = ({
       <div className="absolute top-0 left-1/4 right-1/4 h-[1px] bg-gradient-to-r from-transparent via-amber-400 to-transparent z-10" />
 
       {/* Content */}
-      <div className="relative z-10">
+      <div className="relative z-10 text-white">
         {children}
       </div>
     </motion.div>

@@ -19,6 +19,7 @@ import {
   ArrowRight,
   ShieldCheck,
   Star,
+  BookOpen,
 } from 'lucide-react';
 
 const categories = [
@@ -36,7 +37,6 @@ export const Navbar = () => {
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // 🔹 CLICK OUTSIDE LISTENER (PROPERLY INSIDE useEffect)
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -50,7 +50,6 @@ export const Navbar = () => {
     };
   }, []);
 
-  // 🔹 ROUTE CHECK
   const isDashboardRoute =
     pathname?.includes('/dashboard') ||
     pathname?.includes('/admin') ||
@@ -65,9 +64,14 @@ export const Navbar = () => {
       } bg-[#07090e]/90 backdrop-blur-2xl border-b border-amber-500/15 shadow-[0_10px_35px_rgba(0,0,0,0.9)] transition-all duration-300 selection:bg-amber-500 selection:text-black`}
     >
       {/* Top Announcement Bar */}
-      <div className="bg-gradient-to-r from-amber-950/80 via-black to-amber-950/80 border-b border-amber-500/10 text-[11px] font-mono tracking-widest text-amber-300/90 py-1.5 px-4 text-center flex items-center justify-center gap-2">
+      <div className="bg-gradient-to-r from-amber-950 via-zinc-950 to-amber-950 border-b border-amber-500/20 text-[11px] font-mono tracking-widest text-amber-300 py-1.5 px-4 text-center flex items-center justify-center gap-2">
         <Sparkles className="w-3 h-3 text-amber-400 animate-pulse" />
-        <span>VOGUE VIBE MODELS — OFFICIAL INTERNATIONAL TALENT SCOUTING 2026</span>
+        <span>
+          VOGUE VIBE MODELS —{' '}
+          <Link href="/official-guide" className="text-amber-300 hover:text-white font-bold underline underline-offset-2 transition-colors">
+            READ OFFICIAL 2027 EVENT GUIDE &amp; AUDITION RULES 📌
+          </Link>
+        </span>
         <Sparkles className="w-3 h-3 text-amber-400 animate-pulse hidden sm:inline" />
       </div>
 
@@ -106,6 +110,11 @@ export const Navbar = () => {
             <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-amber-400 transition-all duration-300 group-hover:w-full" />
           </Link>
 
+          <Link href="/official-guide" className="text-amber-400 font-bold hover:text-amber-300 transition-colors py-2 relative group flex items-center gap-1">
+            <span>Official Guide 📌</span>
+            <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-amber-400 transition-all duration-300 group-hover:w-full" />
+          </Link>
+
           {/* CATEGORIES DROPDOWN */}
           <div className="relative" ref={dropdownRef}>
             <button
@@ -127,7 +136,7 @@ export const Navbar = () => {
               >
                 <div className="px-3 py-2 border-b border-white/5 flex items-center justify-between text-[10px] text-amber-400 font-mono tracking-widest uppercase">
                   <span>Browse By Specialty</span>
-                  <Crown className="w-3 h-3" />
+                  <Crown className="w-3 h-3 text-amber-400" />
                 </div>
 
                 <div className="grid grid-cols-1 gap-1">
@@ -221,64 +230,45 @@ export const Navbar = () => {
           >
             Home
           </Link>
-
-          <div className="space-y-3 pt-3 border-t border-slate-800/80">
-            <div className="flex items-center justify-between text-xs uppercase tracking-widest text-amber-400 font-mono font-bold">
-              <span>Explore Categories</span>
-              <Crown className="w-3.5 h-3.5" />
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-              {categories.map((cat) => {
-                const Icon = cat.icon;
-                return (
-                  <Link
-                    key={cat.href}
-                    href={cat.href}
-                    className="p-3 rounded-2xl bg-slate-950 border border-slate-800 text-xs text-slate-300 hover:text-white hover:border-amber-500/30 flex items-center gap-3 transition-colors"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <Icon className="w-4 h-4 text-amber-400 shrink-0" />
-                    <div>
-                      <span className="font-semibold block">{cat.label}</span>
-                      <span className="text-[10px] text-slate-500 block">{cat.desc}</span>
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
-
-          <div className="space-y-3 pt-3 border-t border-slate-800">
-            <Link href="/contests" className="block text-sm text-slate-200 hover:text-amber-400" onClick={() => setIsOpen(false)}>
-              Contests
-            </Link>
-            <Link href="/become-model" className="block text-sm text-slate-200 hover:text-amber-400" onClick={() => setIsOpen(false)}>
-              Become a Talent
-            </Link>
-            <Link href="/ContactPage" className="block text-sm text-slate-200 hover:text-amber-400" onClick={() => setIsOpen(false)}>
-              Contact
-            </Link>
-          </div>
-
-          <div className="pt-4 flex flex-col gap-3">
-            <Link
-              href="/login"
-              onClick={() => setIsOpen(false)}
-              className="w-full py-3 text-center rounded-xl bg-slate-950 border border-slate-800 text-white font-bold text-xs uppercase tracking-wider"
-            >
-              Sign In
-            </Link>
-            <Link
-              href="/hire-a-model"
-              onClick={() => setIsOpen(false)}
-              className="w-full py-3 text-center rounded-xl bg-gradient-to-r from-amber-300 to-amber-500 text-black font-bold text-xs uppercase tracking-wider shadow-lg"
-            >
-              Hire Talents
-            </Link>
-          </div>
+          <Link
+            href="/official-guide"
+            className="block text-sm font-bold text-amber-400 hover:text-amber-300"
+            onClick={() => setIsOpen(false)}
+          >
+            Official Guide 📌
+          </Link>
+          <Link
+            href="/models"
+            className="block text-sm font-bold text-slate-300 hover:text-amber-400"
+            onClick={() => setIsOpen(false)}
+          >
+            Models Directory
+          </Link>
+          <Link
+            href="/contests"
+            className="block text-sm font-bold text-slate-300 hover:text-amber-400"
+            onClick={() => setIsOpen(false)}
+          >
+            Contests
+          </Link>
+          <Link
+            href="/become-model"
+            className="block text-sm font-bold text-slate-300 hover:text-amber-400"
+            onClick={() => setIsOpen(false)}
+          >
+            Become a Talent
+          </Link>
+          <Link
+            href="/ContactPage"
+            className="block text-sm font-bold text-slate-300 hover:text-amber-400"
+            onClick={() => setIsOpen(false)}
+          >
+            Contact Support
+          </Link>
         </div>
       )}
     </header>
   );
 };
+
+export default Navbar;
