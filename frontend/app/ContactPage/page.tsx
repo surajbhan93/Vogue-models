@@ -243,7 +243,7 @@ export default function ContactPage() {
                       name="phone"
                       value={formData.phone}
                       onChange={handleChange}
-                      placeholder="+91 9336289192"
+                      placeholder="+91 933628xxxx"
                       required
                       className="w-full bg-zinc-900 text-white placeholder-zinc-500 text-xs sm:text-sm rounded-xl px-4 py-3 border border-zinc-800 focus:outline-none focus:border-amber-400 transition-all"
                     />
@@ -365,7 +365,7 @@ export default function ContactPage() {
                 </div>
                 <div className="space-y-0.5">
                   <h4 className="text-xs font-bold uppercase tracking-wider text-amber-300">Audition Helpline &amp; WhatsApp</h4>
-                  <p className="text-xs text-zinc-300 font-mono">+91 9336289192</p>
+                  <p className="text-xs text-zinc-300 font-mono">+91 933628xxxx</p>
                 </div>
               </div>
 
