@@ -14,14 +14,9 @@ import {
   Sparkles,
   ArrowRight,
   ShieldCheck,
-  Crown,
-  Heart,
   MapPin,
   Mail,
   Phone,
-  CheckCircle2,
-  Code,
-  Award,
   BookOpen,
   Newspaper,
 } from 'lucide-react';
@@ -104,19 +99,19 @@ export const Footer = () => {
         <div className="absolute -bottom-40 left-1/2 -translate-x-1/2 w-[1100px] h-[400px] bg-gradient-to-t from-amber-500/20 via-amber-600/10 to-transparent blur-[140px] rounded-full" />
       </div>
 
-      <div className="relative z-10 w-full max-w-[1650px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 pt-12 md:pt-16 pb-12">
+      <div className="relative z-10 w-full max-w-[1650px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 pt-12 md:pt-14 pb-10">
         
         {/* Top Newsletter Banner */}
-        <div className="p-6 sm:p-8 md:p-10 rounded-3xl bg-gradient-to-r from-slate-950 via-zinc-900 to-slate-950 border border-amber-500/30 shadow-[0_0_30px_rgba(245,158,11,0.1)] mb-12 md:mb-16 flex flex-col lg:flex-row items-center justify-between gap-6">
-          <div className="space-y-2 text-center lg:text-left max-w-2xl">
+        <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-slate-950 via-zinc-900 to-slate-950 border border-amber-500/30 shadow-[0_0_30px_rgba(245,158,11,0.1)] mb-10 md:mb-12 flex flex-col lg:flex-row items-center justify-between gap-6">
+          <div className="space-y-1.5 text-center lg:text-left max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-bold bg-amber-500/15 text-amber-300 border border-amber-500/30 uppercase tracking-widest">
               <Sparkles className="w-3 h-3 text-amber-400 animate-pulse" /> Boom Boom Night In America 2027
             </div>
             <h3 className="text-xl sm:text-2xl md:text-3xl font-serif font-extrabold text-white tracking-wide">
               Subscribe to Vogue Agency Talent Launchpad
             </h3>
-            <p className="text-xs sm:text-sm text-slate-400 leading-relaxed font-light">
-              Get exclusive audition alerts for Modeling, Singing, Painting, Acting, and Fashion Designing with USA certification from I Catch Management &amp; Hiba Entertainment USA.
+            <p className="text-xs sm:text-sm text-slate-400 font-light leading-relaxed">
+              Get official audition notifications for Modeling, Singing, Painting, Acting &amp; Fashion Designing with USA certification.
             </p>
           </div>
 
@@ -139,22 +134,20 @@ export const Footer = () => {
           </form>
         </div>
 
-        {/* Main Footer Columns (5 Columns) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 sm:gap-10 lg:gap-12">
+        {/* 🌟 MAIN FOOTER GRID (Clean 4 Columns) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12">
           
-          {/* Brand & Address Column */}
-          <div className="space-y-5 sm:col-span-2 md:col-span-3 lg:col-span-1 pr-0 lg:pr-4">
-            <Link href="/" className="flex items-center gap-3 group">
-              <div className="relative shrink-0">
-                <Image
-                  src="https://res.cloudinary.com/ujpa9sap/image/upload/v1786020022/cropped_circle_image_utg5ck.png"
-                  alt="Vogue Agency Official Logo"
-                  width={44}
-                  height={44}
-                  priority
-                  className="w-11 h-11 object-contain rounded-full border border-amber-500/40 shadow-[0_0_20px_rgba(245,158,11,0.25)] group-hover:scale-105 transition-transform duration-300"
-                />
-              </div>
+          {/* Column 1: Brand & Contact (Concise 3 Lines) */}
+          <div className="space-y-4">
+            <Link href="/" className="flex items-center gap-2.5 group">
+              <Image
+                src="https://res.cloudinary.com/ujpa9sap/image/upload/v1786020022/cropped_circle_image_utg5ck.png"
+                alt="Vogue Agency Official Logo"
+                width={40}
+                height={40}
+                priority
+                className="w-10 h-10 object-contain rounded-full border border-amber-500/40 shadow-[0_0_15px_rgba(245,158,11,0.25)] group-hover:scale-105 transition-transform"
+              />
               <div className="flex flex-col">
                 <div className="flex items-center gap-1">
                   <span className="font-serif text-lg tracking-tight text-white font-extrabold">
@@ -170,155 +163,181 @@ export const Footer = () => {
               </div>
             </Link>
 
-            <p className="text-slate-300 text-xs leading-relaxed font-light">
-              India’s premier multi-talent launchpad across 5 pillars: Modeling, Singing, Painting, Acting, and Fashion Designing. Partnered with I Catch Management &amp; Hiba Entertainment USA.
+            <p className="text-slate-300 text-xs font-light leading-relaxed">
+              India’s premier 5-pillar launchpad: Modeling, Singing, Painting, Acting &amp; Designing. Partnered with I Catch Management USA.
             </p>
 
-            <div className="space-y-2 text-xs text-slate-300 font-medium">
-              <div className="flex items-start gap-2">
+            <div className="space-y-1.5 text-xs text-slate-300 font-medium">
+              <div className="flex items-start gap-1.5">
                 <MapPin className="w-3.5 h-3.5 text-amber-400 shrink-0 mt-0.5" />
-                <span>58/78 Near Kairali Homes Building, Ayyanthole, Thrissur, Kerala – 680 003</span>
+                <span>58/78 Near Kairali Homes, Ayyanthole, Thrissur, Kerala – 680003</span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5">
                 <Mail className="w-3.5 h-3.5 text-amber-400 shrink-0" />
                 <a href="mailto:info@voguevibemodels.com" className="hover:text-amber-300 transition-colors font-mono">
                   info@voguevibemodels.com
                 </a>
               </div>
-              <div className="flex items-center gap-2">
-                <Phone className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-                <span>+91 9336289192</span>
-              </div>
             </div>
 
-            {/* Official Social Links */}
-            <div className="space-y-1.5 pt-1">
-              <span className="text-[10px] uppercase font-bold tracking-widest text-amber-400 block">
-                Official Social Networks
-              </span>
-              <div className="flex flex-wrap items-center gap-2">
-                {socialLinks.map((social, idx) => (
-                  <a
-                    key={idx}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={social.label}
-                    title={social.label}
-                    className={`p-2 rounded-xl bg-slate-950/80 border border-slate-700 text-slate-400 ${social.hoverColor} hover:bg-slate-900 transition-all duration-300 group backdrop-blur-sm`}
-                  >
-                    <social.icon className="w-3.5 h-3.5 group-hover:scale-110 transition-transform" />
-                  </a>
-                ))}
-              </div>
+            {/* Social Icons */}
+            <div className="flex items-center gap-2 pt-1">
+              {socialLinks.map((social, idx) => (
+                <a
+                  key={idx}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.label}
+                  className={`p-2 rounded-xl bg-slate-950/80 border border-slate-800 text-slate-400 ${social.hoverColor} hover:bg-slate-900 transition-all`}
+                >
+                  <social.icon className="w-3.5 h-3.5" />
+                </a>
+              ))}
             </div>
           </div>
 
-          {/* 5 Talent Pillars */}
+          {/* Column 2: Talent Categories (Clean 4 Lines) */}
           <div>
-            <h4 className="font-serif text-white font-bold text-sm mb-4 tracking-wide uppercase flex items-center gap-2">
-              <span className="w-1.5 h-4 bg-amber-500 rounded-full" />
-              5 Talent Categories
+            <h4 className="font-serif text-white font-bold text-sm mb-3 tracking-wide uppercase flex items-center gap-2">
+              <span className="w-1.5 h-3.5 bg-amber-500 rounded-full" />
+              Talent Categories
             </h4>
-            <ul className="space-y-2.5 text-xs sm:text-sm">
-              {[
-                { name: '👠 Modeling Division', href: '/models' },
-                { name: '🎭 Acting & Drama', href: '/actors' },
-                { name: '🎤 Singing & Vocalists', href: '/singers' },
-                { name: '👗 Fashion Designing', href: '/categories' },
-                { name: '🎨 Painting & Fine Art', href: '/painters' },
-              ].map((cat, idx) => (
-                <li key={idx}>
-                  <Link href={cat.href} className="hover:text-amber-300 transition-colors flex items-center gap-2 py-0.5 text-slate-300">
-                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400/80 shrink-0" /> {cat.name}
-                  </Link>
-                </li>
-              ))}
+            <ul className="space-y-2 text-xs sm:text-sm">
               <li>
-                <Link href="/become-model#register" className="text-amber-400 hover:text-amber-300 font-semibold transition-colors flex items-center gap-1.5 pt-2">
-                  <Sparkles className="w-3.5 h-3.5 text-amber-400" /> Apply For Registration
+                <Link href="/models" className="hover:text-amber-300 transition-colors text-slate-300">
+                  👠 Modeling Division
+                </Link>
+              </li>
+              <li>
+                <Link href="/actors" className="hover:text-amber-300 transition-colors text-slate-300">
+                  🎭 Acting &amp; Drama
+                </Link>
+              </li>
+              <li>
+                <Link href="/singers" className="hover:text-amber-300 transition-colors text-slate-300">
+                  🎤 Singing &amp; Vocalists
+                </Link>
+              </li>
+              <li>
+                <Link href="/categories" className="hover:text-amber-300 transition-colors text-slate-300">
+                  👗 Fashion &amp; 🎨 Painting
+                </Link>
+              </li>
+              <li>
+                <Link href="/become-model#register" className="text-amber-400 hover:text-amber-300 font-semibold transition-colors flex items-center gap-1 pt-1">
+                  <Sparkles className="w-3.5 h-3.5" /> Register For Audition
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* 📰 Fashion & Career Blogs Column */}
+          {/* Column 3: Company & Launchpad (Clean 4 Lines) */}
           <div>
-            <h4 className="font-serif text-white font-bold text-sm mb-4 tracking-wide uppercase flex items-center gap-2">
-              <span className="w-1.5 h-4 bg-amber-500 rounded-full" />
-              Fashion &amp; Career Blogs
-            </h4>
-            <ul className="space-y-2.5 text-xs sm:text-sm">
-              {[
-                { name: '📰 Official Blog Magazine', href: '/blogs' },
-                { name: '📸 Model Polaroid Audition Guide', href: '/blogs' },
-                { name: '🎤 Acting Voice Modulation Tips', href: '/blogs' },
-                { name: '🎨 Time-Lapse Painting Proofs', href: '/blogs' },
-                { name: '👗 Fashion Lookbook Strategies', href: '/blogs' },
-                { name: '🏆 USA Certificate Verification', href: '/about#certification' },
-              ].map((blog, idx) => (
-                <li key={idx}>
-                  <Link href={blog.href} className="hover:text-amber-300 transition-colors flex items-center gap-1.5 py-0.5 text-slate-300">
-                    <BookOpen className="w-3 h-3 text-amber-400 shrink-0" />
-                    <span>{blog.name}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Company & Global Auditions */}
-          <div>
-            <h4 className="font-serif text-white font-bold text-sm mb-4 tracking-wide uppercase flex items-center gap-2">
-              <span className="w-1.5 h-4 bg-amber-500 rounded-full" />
+            <h4 className="font-serif text-white font-bold text-sm mb-3 tracking-wide uppercase flex items-center gap-2">
+              <span className="w-1.5 h-3.5 bg-amber-500 rounded-full" />
               Company &amp; Launchpad
             </h4>
-            <ul className="space-y-2.5 text-xs sm:text-sm">
-              {[
-                { name: 'About Us (12 Yrs Legacy)', href: '/about' },
-                { name: 'Contests & Mega Finale', href: '/contests' },
-                { name: 'USA Partner Certification', href: '/about#certification' },
-                { name: 'USA & College Courses', href: '/about#courses' },
-                { name: 'Contact Support Helpline', href: '/ContactPage' },
-                { name: 'Frequently Asked Questions', href: '/faq' },
-              ].map((link, idx) => (
-                <li key={idx}>
-                  <Link href={link.href} className="hover:text-amber-300 transition-colors py-0.5 block text-slate-300">
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
+            <ul className="space-y-2 text-xs sm:text-sm">
+              <li>
+                <Link href="/about" className="hover:text-amber-300 transition-colors text-slate-300">
+                  About Us (12 Yrs Legacy)
+                </Link>
+              </li>
+              <li>
+                <Link href="/contests" className="hover:text-amber-300 transition-colors text-slate-300">
+                  Contests &amp; Mega Finale
+                </Link>
+              </li>
+              <li>
+                <Link href="/about#certification" className="hover:text-amber-300 transition-colors text-slate-300">
+                  USA Partner Certification
+                </Link>
+              </li>
+              <li>
+                <Link href="/ContactPage" className="hover:text-amber-300 transition-colors text-slate-300">
+                  Contact Support Helpline
+                </Link>
+              </li>
+              <li>
+                <Link href="/faq" className="hover:text-amber-300 transition-colors text-slate-300">
+                  Frequently Asked Questions
+                </Link>
+              </li>
             </ul>
           </div>
 
-          {/* Legal Policies */}
+          {/* Column 4: Legal & Policies (Clean 4 Lines) */}
           <div>
-            <h4 className="font-serif text-white font-bold text-sm mb-4 tracking-wide uppercase flex items-center gap-2">
-              <span className="w-1.5 h-4 bg-amber-500 rounded-full" />
+            <h4 className="font-serif text-white font-bold text-sm mb-3 tracking-wide uppercase flex items-center gap-2">
+              <span className="w-1.5 h-3.5 bg-amber-500 rounded-full" />
               Legal &amp; Trust Policies
             </h4>
-            <ul className="space-y-2.5 text-xs sm:text-sm">
-              {[
-                { name: 'Terms & Conditions', href: '/terms-and-conditions' },
-                { name: 'Refund & Fee Policy', href: '/refund-policy' },
-                { name: 'Cancellation Policy', href: '/cancellation-policy' },
-                { name: 'Privacy Policy', href: '/privacy-policy' },
-                { name: 'Copyright & IP Policy', href: '/copyright-policy' },
-                { name: 'Disclaimer', href: '/disclaimer' },
-              ].map((policy, idx) => (
-                <li key={idx}>
-                  <Link href={policy.href} className="hover:text-amber-300 transition-colors py-0.5 block text-slate-300">
-                    {policy.name}
-                  </Link>
-                </li>
-              ))}
+            <ul className="space-y-2 text-xs sm:text-sm">
+              <li>
+                <Link href="/terms-and-conditions" className="hover:text-amber-300 transition-colors text-slate-300">
+                  Terms &amp; Conditions
+                </Link>
+              </li>
+              <li>
+                <Link href="/refund-policy" className="hover:text-amber-300 transition-colors text-slate-300">
+                  Refund &amp; Fee Policy
+                </Link>
+              </li>
+              <li>
+                <Link href="/privacy-policy" className="hover:text-amber-300 transition-colors text-slate-300">
+                  Privacy &amp; Data Policy
+                </Link>
+              </li>
+              <li>
+                <Link href="/copyright-policy" className="hover:text-amber-300 transition-colors text-slate-300">
+                  Copyright &amp; IP Policy
+                </Link>
+              </li>
+              <li>
+                <Link href="/disclaimer" className="hover:text-amber-300 transition-colors text-slate-300">
+                  Legal Disclaimer
+                </Link>
+              </li>
             </ul>
           </div>
 
         </div>
 
-        {/* Bottom Copyright & USA Entity Verification Strip */}
-        <div className="mt-12 pt-6 border-t border-slate-800/80 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-400 font-mono">
+        {/* 📰 DEDICATED BLOG HIGHLIGHTS STRIP (UI Ke Niche Add Blog) */}
+        <div className="mt-10 pt-6 border-t border-zinc-800/80">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 bg-zinc-950/80 p-4 rounded-2xl border border-amber-500/20 shadow-inner">
+            <div className="flex items-center gap-2.5 text-amber-400 font-mono text-xs uppercase font-bold tracking-widest shrink-0">
+              <Newspaper className="w-4 h-4" />
+              <span>Fashion &amp; Talent Blogs:</span>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-4 text-xs text-zinc-300">
+              <Link href="/blogs" className="hover:text-amber-300 transition-colors flex items-center gap-1">
+                <BookOpen className="w-3 h-3 text-amber-400" /> Official Blog Magazine
+              </Link>
+              <span>•</span>
+              <Link href="/blogs" className="hover:text-amber-300 transition-colors">
+                📸 Model Polaroid Guide
+              </Link>
+              <span>•</span>
+              <Link href="/blogs" className="hover:text-amber-300 transition-colors">
+                🎤 Acting Voice Modulation
+              </Link>
+              <span>•</span>
+              <Link href="/blogs" className="hover:text-amber-300 transition-colors">
+                🎨 Time-Lapse Painting Proofs
+              </Link>
+              <span>•</span>
+              <Link href="/blogs" className="hover:text-amber-300 transition-colors">
+                👗 Fashion Lookbook Strategies
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Copyright & Codelura Attribution Strip */}
+        <div className="mt-6 pt-4 border-t border-slate-800/80 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-slate-400 font-mono">
           <div className="flex flex-col sm:flex-row items-center gap-2 text-center md:text-left">
             <span>© 2027 VOGUE AGENCY • BOOM BOOM NIGHT IN AMERICA</span>
             <span className="hidden sm:inline">•</span>
@@ -330,7 +349,17 @@ export const Footer = () => {
               <ShieldCheck className="w-3.5 h-3.5" /> 30% TDS Compliant (Section 194B)
             </span>
             <span>•</span>
-            <span className="text-amber-300">₹3,00,000 Grand Prize / USA Trip</span>
+            <span>
+              Built by{' '}
+              <a
+                href="https://build.codelura.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-amber-400 hover:text-amber-300 font-bold underline underline-offset-4 transition-colors"
+              >
+                Codelura
+              </a>
+            </span>
           </div>
         </div>
 
