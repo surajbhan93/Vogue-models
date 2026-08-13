@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function BecomeModelPage() {
   return (
-    <div className="min-h-screen bg-[#070709] text-white relative selection:bg-amber-400 selection:text-black flex flex-col justify-between overflow-x-hidden">
+    <div className="min-h-screen transition-colors flex flex-col justify-between overflow-x-hidden">
       
       {/* 🌟 LUXURY EDITORIAL BACKGROUND IMAGE & AMBIENT GLOWS */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">

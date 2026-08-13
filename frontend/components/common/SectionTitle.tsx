@@ -21,11 +21,11 @@ export function SectionTitle({
   return (
     <div className={`space-y-3 max-w-3xl ${alignClass} ${className}`}>
       {badge && <SectionBadge>{badge}</SectionBadge>}
-      <h2 className="font-serif text-3xl md:text-5xl font-bold text-white tracking-tight leading-tight">
+      <h2 className="font-serif text-3xl md:text-5xl font-bold text-slate-900 tracking-tight leading-tight">
         {title}
       </h2>
       {subtitle && (
-        <p className="text-zinc-300 text-sm md:text-base font-light leading-relaxed">
+        <p className="text-slate-600 text-sm md:text-base font-light leading-relaxed">
           {subtitle}
         </p>
       )}

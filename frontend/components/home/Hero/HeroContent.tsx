@@ -24,7 +24,7 @@ export function HeroContent({
         <SectionBadge icon>{badgeText}</SectionBadge>
       </div>
 
-      <h1 className="font-serif text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-tight uppercase animate-in fade-in slide-in-from-bottom-6 duration-1000">
+      <h1 className="font-serif text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight uppercase animate-in fade-in slide-in-from-bottom-6 duration-1000">
         {titlePrefix}{' '}
         <span className="gold-gradient-text italic font-normal lowercase">
           {titleHighlight}
@@ -32,7 +32,7 @@ export function HeroContent({
         {titleSuffix}
       </h1>
 
-      <p className="text-sm md:text-base text-zinc-300 max-w-xl mx-auto lg:mx-0 font-light leading-relaxed animate-in fade-in slide-in-from-bottom-8 duration-1000">
+      <p className="text-sm md:text-base text-slate-600 max-w-xl mx-auto lg:mx-0 font-light leading-relaxed animate-in fade-in slide-in-from-bottom-8 duration-1000">
         {subtitle}
       </p>
     </div>

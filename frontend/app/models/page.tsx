@@ -137,7 +137,7 @@ export default function PublicModelsPage() {
   });
 
   return (
-    <div className="min-h-screen bg-[#07090e] text-slate-100 selection:bg-amber-500 selection:text-black py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen transition-colors py-12 px-4 sm:px-6 lg:px-8">
       {/* Background Ambient Glow */}
       <div className="pointer-events-none fixed inset-0 z-0">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-amber-500/10 blur-[140px] rounded-full" />

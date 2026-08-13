@@ -20,8 +20,8 @@ html {
   scroll-behavior: smooth;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  background-color: #07090e;
-  color: #f4f4f5;
+  background-color: #ffffff;
+  color: #0f172a;
 }
 
 /* 🔹 Hide Scrollbars for Horizontal Scrolling */
@@ -33,72 +33,155 @@ html {
   scrollbar-width: none;
 }
 
-/* 🌟 LUXURY DARK HIGH-FASHION THEME */
+/* 🌟 DEFAULT PURE WHITE THEME FOR ALL PAGES */
 body {
-  background-color: #07090e !important;
-  color: #f4f4f5 !important;
+  background-color: #ffffff !important;
+  color: #0f172a !important;
   font-family: var(--font-sans);
   overflow-x: hidden;
 }
 
-/* ===========================
-   DARK SELECT
-=========================== */
+/* =============================================================================
+   🌟 LIGHT MODE OVERRIDES (.light-mode) - FORCE PURE WHITE BACKGROUNDS EVERYWHERE
+============================================================================= */
 
-select {
-  width: 100%;
-  background: rgba(17, 17, 17, 0.95);
-  color: #ffffff;
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 10px;
-  padding: 12px 16px;
-  font-size: 15px;
-  outline: none;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
+.light-mode html,
+.light-mode body,
+.light-mode #main-content,
+.light-mode #main-content main,
+.light-mode #main-content div {
+  color: #0f172a;
 }
 
-select:focus {
-  border-color: #D4AF37;
-  box-shadow: 0 0 0 3px rgba(212,175,55,.2);
+.light-mode #main-content {
+  background-color: #ffffff !important;
 }
 
-select option {
-  background: #111111;
-  color: #ffffff;
+/* Force all hardcoded dark backgrounds to PURE WHITE in light mode */
+.light-mode #main-content .bg-[#030508],
+.light-mode #main-content .bg-[#07090e],
+.light-mode #main-content .bg-[#070709],
+.light-mode #main-content .bg-black,
+.light-mode #main-content .bg-zinc-950,
+.light-mode #main-content .bg-zinc-900,
+.light-mode #main-content .bg-zinc-950\/80,
+.light-mode #main-content .bg-zinc-950\/90,
+.light-mode #main-content .bg-zinc-900\/80,
+.light-mode #main-content .bg-zinc-900\/90,
+.light-mode #main-content .min-h-screen {
+  background-color: #ffffff !important;
 }
 
-select option:hover {
-  background: #D4AF37;
-  color: #111111;
+/* High Contrast Text Color in Light Mode so NO white text is hidden on white background */
+.light-mode #main-content h1,
+.light-mode #main-content h2,
+.light-mode #main-content h3,
+.light-mode #main-content h4,
+.light-mode #main-content h5,
+.light-mode #main-content h6,
+.light-mode #main-content font,
+.light-mode #main-content b,
+.light-mode #main-content strong {
+  color: #0f172a !important;
 }
 
-select option:checked {
-  background: #D4AF37;
-  color: #111111;
+.light-mode #main-content p,
+.light-mode #main-content span,
+.light-mode #main-content li,
+.light-mode #main-content div:not(.bg-amber-400) {
+  color: #334155;
 }
 
-.glass-panel {
-  background: rgba(24, 24, 27, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+.light-mode #main-content .text-white,
+.light-mode #main-content .text-zinc-100,
+.light-mode #main-content .text-zinc-200,
+.light-mode #main-content .text-zinc-300,
+.light-mode #main-content .text-zinc-400,
+.light-mode #main-content .text-slate-300,
+.light-mode #main-content .text-slate-400 {
+  color: #334155 !important;
 }
 
-.glass-nav {
-  background: rgba(9, 9, 11, 0.9);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.gold-gradient-text {
-  background: linear-gradient(135deg, #ffffff 0%, #d4af37 50%, #e6c875 100%);
+/* Gold Gradient Text in Light Mode */
+.light-mode #main-content .gold-gradient-text {
+  background: linear-gradient(135deg, #0f172a 0%, #b45309 50%, #d97706 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.gold-glow {
-  box-shadow: 0 0 25px rgba(212, 175, 55, 0.2);
+/* Card Borders & Shadows in Light Mode */
+.light-mode #main-content .border-zinc-800,
+.light-mode #main-content .border-zinc-900,
+.light-mode #main-content .border-zinc-800\/80,
+.light-mode #main-content .border-amber-500\/30,
+.light-mode #main-content .border-amber-500\/40 {
+  border-color: #e2e8f0 !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Form Inputs & Selects in Light Mode */
+.light-mode #main-content select,
+.light-mode #main-content input,
+.light-mode #main-content textarea {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+.light-mode #main-content select option {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+}
+
+/* Badges in Light Mode */
+.light-mode #main-content .bg-amber-500\/10,
+.light-mode #main-content .bg-amber-500\/15,
+.light-mode #main-content .bg-amber-500\/20 {
+  background-color: #fef3c7 !important;
+  color: #78350f !important;
+  border-color: #fde68a !important;
+}
+
+/* =============================================================================
+   🖤 BLACK MODE OVERRIDES (When data-theme="dark" is active)
+============================================================================= */
+
+html[data-theme="dark"],
+html[data-theme="dark"] body {
+  background-color: #07090e !important;
+  color: #f4f4f5 !important;
+}
+
+html[data-theme="dark"] #main-content {
+  background-color: #07090e !important;
+  color: #f4f4f5 !important;
+}
+
+html[data-theme="dark"] #main-content .bg-[#030508] {
+  background-color: #030508 !important;
+}
+
+html[data-theme="dark"] #main-content .bg-[#07090e] {
+  background-color: #07090e !important;
+}
+
+html[data-theme="dark"] #main-content .bg-[#070709] {
+  background-color: #070709 !important;
+}
+
+html[data-theme="dark"] #main-content .text-white {
+  color: #ffffff !important;
+}
+
+html[data-theme="dark"] #main-content .text-zinc-300 {
+  color: #d4d4d8 !important;
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spinSlow 12s linear infinite;
 }

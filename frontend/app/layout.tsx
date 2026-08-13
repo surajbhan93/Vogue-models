@@ -5,6 +5,7 @@ import './global.css';
 // Existing Imports
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
+import { ClientThemeWrapper } from '@/components/common/ClientThemeWrapper';
 
 // =============================================================================
 // 1. FONT OPTIMIZATION (Next.js 15 zero-CLS font loader)
@@ -269,7 +270,8 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`dark scroll-smooth ${inter.variable} ${playfair.variable}`}
+      className={`light-mode ${inter.variable} ${playfair.variable}`}
+      data-theme="light"
     >
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -302,6 +304,9 @@ export default function RootLayout({
 
         {/* Footer */}
         <Footer />
+
+        {/* Floating Theme Toggle Circle (White / Black Mode) */}
+        {/* <ClientThemeWrapper /> */}
 
         <noscript>
           <div className="fixed bottom-0 left-0 right-0 bg-amber-500 text-black text-center p-3 text-sm font-semibold z-50">

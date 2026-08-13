@@ -21,7 +21,7 @@ export const metadata = generatePageMetadata({
 
 export default function OfficialGuidePage() {
   return (
-    <main className="min-h-screen bg-black text-white">
+    <main className="min-h-screen transition-colors">
       <PageHero
         badge="Official 2027 Guide"
         title="Event Guide & Audition Rules"

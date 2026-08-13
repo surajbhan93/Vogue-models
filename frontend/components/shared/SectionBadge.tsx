@@ -10,9 +10,9 @@ interface SectionBadgeProps {
 export function SectionBadge({ children, icon = false, className = '' }: SectionBadgeProps) {
   return (
     <span
-      className={`inline-flex items-center gap-2 px-4 py-1.5 glass-panel border border-gold-500/30 text-gold-400 text-xs font-semibold uppercase tracking-[0.3em] ${className}`}
+      className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300 text-xs font-mono font-bold uppercase tracking-widest shadow-sm ${className}`}
     >
-      {icon && <Sparkles className="w-3.5 h-3.5" />}
+      {icon && <Sparkles className="w-3.5 h-3.5 text-amber-600" />}
       <span>{children}</span>
     </span>
   );
